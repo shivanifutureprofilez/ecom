@@ -31,7 +31,7 @@ const products = [
 
 function NewArrival({title = "New Arrival"}) {
   return (
-    <section className="max-w-6xl mx-auto mt-12 px-4">
+    <section className="max-w-6xl mx-auto px-4">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-3xl font-bold text-gray-800">{title}</h2>
         <a href="/collection" className="text-gray-700 font-medium hover:text-yellow-700 flex items-center gap-2">

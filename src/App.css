@@ -1,0 +1,25 @@
+.swiper-button-next {
+    color: black !important;
+    padding: 18px !important;
+    border: 2px solid black !important;
+    border-radius: 20% !important;
+}
+
+.swiper-button-next::after {
+    font-size: 15px !important;
+    font-weight: 600;
+
+
+}
+
+.swiper-button-prev {
+    color: black !important;
+    padding: 18px !important;
+    border: 2px solid black !important;
+    border-radius: 20% !important;
+}
+
+.swiper-button-prev::after {
+    font-size: 15px !important;
+    font-weight: 600;
+}

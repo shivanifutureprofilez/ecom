@@ -71,7 +71,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      {/* Copyright */}
+      {/* Copyright */} 
       <div className="mt-8 text-center text-gray-500 text-sm">
         © 2025 Furnixar Develop with <FaHeart className="inline text-red-500 mx-1" /> By Shreethemes
       </div>

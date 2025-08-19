@@ -9,30 +9,29 @@ import NewArrival from './Components/NewArrival';
 import Blogs from './Components/Blogs';
 import Newsletter from './Components/Newsletter';
 import { Importance } from './Components/Importance';
+import PhotoGrid from './Components/PhotoGrid';
+import Swiper from './Components/Swiper';
 
+ 
 function App() {
   return (
     <div className="App">
-      <div className=" w-full h-screen">
         {/* Banner */}
-        <Banner />
-        {/* Navbar */}
         <Navbar />
-        <div className="relative inset-0 flex items-center justify-center">
+        {/* Navbar */}
+        <Banner />
           {/* CategoryBar */}
-          <CategoryBar />
-        </div>
-      </div>
+        <CategoryBar />
       {/* New Arrival */}
-      <NewArrival title='New Arrival' />
+      <NewArrival  title='New Arrival' />
       {/* Why You Choose Us */}
       <Importance/>
       {/* Best Sellers Grid */}
-
+      <PhotoGrid/>
       {/* Trending Bar */}
       <NewArrival title='Trending' />
       {/* Slider */}
-
+      <Swiper/>
       {/* Latest Blog Bar */}
       <Blogs />
 
