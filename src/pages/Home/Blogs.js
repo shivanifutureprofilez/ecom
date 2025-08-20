@@ -1,13 +1,16 @@
-import React from 'react'
-import newArrival1 from '../Assets/newArrival1.jpg';
-import newArrival2 from '../Assets/newArrival2.jpg';
-import newArrival3 from '../Assets/newArrival3.jpg';
-import newArrival4 from '../Assets/newArrival4.jpg';
-import Blog2 from '../Assets/Blog2.jpg';
-import Blog3 from '../Assets/Blog3.jpg';
-import Blog4 from '../Assets/Blog4.jpg';
 
-const blogs = [
+import newArrival1 from '../../Assets/newArrival1.jpg';
+import newArrival2 from '../../Assets/newArrival2.jpg';
+import newArrival3 from '../../Assets/newArrival3.jpg';
+import newArrival4 from '../../Assets/newArrival4.jpg';
+import Blog2 from '../../Assets/Blog2.jpg';
+import Blog3 from '../../Assets/Blog3.jpg';
+import Blog4 from '../../Assets/Blog4.jpg';
+
+import React from 'react'
+
+function Blogs () {
+    const blogs = [
     {
         img: newArrival2,
         date: "13th Sept 2025",
@@ -37,7 +40,6 @@ const blogs = [
         body: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
     },
 ];
-const Blogs = () => {
     return (
         <section className="max-w-6xl mx-auto mt-12 px-4">
             <div className="flex items-center justify-between mb-6">

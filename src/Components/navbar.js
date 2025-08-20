@@ -10,19 +10,19 @@ function Navbar() {
     { name: "Shop", href: "/shop" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
-    { name: "Login", href: "/login" },
+    { name: "Login", href: '/login' },
+    { name: "Regiter", href: '/register' },
   ];
 
   return (
-    <div className="bg-white w-full shadow-md fixed top-4 left-0 z-50 ">
+    <div className="bg-white w-full shadow-md fixed top-0 md:top-4 left-0 z-50 ">
       <div className="flex items-center justify-between px-4 md:px-8 py-3">
-        
+
         {/* Logo */}
         <div className="flex items-center space-x-2">
           <span className="text-2xl font-bold text-gray-800">Furnixar</span>
         </div>
 
-        {/* Desktop & Tablet Nav */}
         <ul className="hidden md:flex space-x-6 text-gray-700 font-semibold">
           {navLinks.map((link) => (
             <li key={link.name}>
@@ -33,7 +33,6 @@ function Navbar() {
           ))}
         </ul>
 
-        {/* Icons */}
         <div className="hidden md:flex items-center space-x-4">
           <FiSearch className="text-xl cursor-pointer hover:text-yellow-600" />
           <div className="relative">
@@ -45,7 +44,6 @@ function Navbar() {
           <FiMoon className="text-xl cursor-pointer hover:text-yellow-600" />
         </div>
 
-        {/* Mobile Hamburger */}
         <div className="md:hidden">
           {isMobileMenuOpen ? (
             <FiX
@@ -61,7 +59,6 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white shadow-md px-6 py-4">
           <ul className="space-y-4 text-gray-700 font-semibold">
@@ -78,7 +75,7 @@ function Navbar() {
             ))}
           </ul>
 
-          {/* Icons under menu on mobile */}
+
           <div className="flex items-center space-x-4 mt-4">
             <FiSearch className="text-xl cursor-pointer hover:text-yellow-600" />
             <FiHeart className="text-xl cursor-pointer hover:text-yellow-600" />

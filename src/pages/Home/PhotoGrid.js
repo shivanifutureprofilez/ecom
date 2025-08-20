@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import newArrival1 from '../Assets/newArrival1.jpg';
-import newArrival2 from '../Assets/newArrival2.jpg';
-import newArrival3 from '../Assets/newArrival3.jpg';
-import newArrival4 from '../Assets/newArrival4.jpg';
-import newArrival5 from '../Assets/newArrival5.jpg';
+import newArrival1 from '../../Assets/newArrival1.jpg';
+import newArrival2 from '../../Assets/newArrival2.jpg';
+import newArrival3 from '../../Assets/newArrival3.jpg';
+import newArrival4 from '../../Assets/newArrival4.jpg';
+import newArrival5 from '../../Assets/newArrival5.jpg';
 
 const PhotoGrid = () => {
     const [calender, setCalender] = useState("day");
@@ -38,15 +38,15 @@ const PhotoGrid = () => {
               {calender === "day" && (
                 <div className='flex flex-wrap px-2'>
                     <div className='flex-[25%] px-2'>
-                        <img src={newArrival1} alt="img1"/>
+                        <img src={newArrival1} alt="img1" className='mb-4'/>
                         <img src={newArrival2} alt="img1"/>
                     </div>
                     <div className='flex-[25%] px-2'>
-                        <img src={newArrival3} alt="img1"/>
+                        <img src={newArrival3} alt="img1" className='mb-4'/>
                         <img src={newArrival4} alt="img1"/>
                     </div>
                     <div className='flex-[50%] px-2'>
-                        <img src={newArrival5} alt="img1"/>
+                        <img src={newArrival5} alt="img1" className='md:h-[590px]'/>
                     </div>
                 </div>
             )}

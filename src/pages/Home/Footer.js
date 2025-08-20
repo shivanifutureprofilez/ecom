@@ -1,14 +1,13 @@
-import React from 'react'
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaHeart } from "react-icons/fa";
 
-export const Footer = () => {
+function Footer() {
   return (
     <footer className="bg-white py-8 px-4">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-start justify-between gap-8">
         {/* Logo & Description */}
         <div className="flex flex-col items-start min-w-[180px]">
           <div className="flex items-center space-x-2 mb-2">
-            <img src="/logo.svg" alt="Furnixar" className="h-8 w-8" />
+            {/* <img src="/logo.svg" alt="Furnixar" className="h-8 w-8" /> */}
             <span className="text-2xl font-bold text-gray-800">Furnixar</span>
           </div>
           <p className="text-gray-600 text-sm max-w-[180px]">
@@ -78,3 +77,5 @@ export const Footer = () => {
     </footer>
   )
 }
+
+export default Footer;
