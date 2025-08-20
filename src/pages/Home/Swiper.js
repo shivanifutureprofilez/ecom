@@ -1,5 +1,4 @@
 import { LiaSignatureSolid } from "react-icons/lia";
-import { FcSignature } from "react-icons/fc";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { GiGooeySword } from "react-icons/gi";
 import { SiCocacola } from "react-icons/si";
@@ -12,7 +11,7 @@ import { GiBrainTentacle } from "react-icons/gi";
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import { MdAdd } from "react-icons/md";
 // Import Swiper styles
 

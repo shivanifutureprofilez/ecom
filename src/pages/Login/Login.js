@@ -1,5 +1,5 @@
 import loginImg from '../../Assets/loginImg.jpg'
-import Navbar from '../../Components/navbar';
+
 
 const Login = () => {
   return (

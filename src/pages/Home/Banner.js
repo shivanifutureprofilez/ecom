@@ -1,6 +1,5 @@
 import React from 'react'
 import banner from '../../Assets/banner.jpg';
-import { FaLongArrowAltRight } from "react-icons/fa";
 export default function Banner() {
   return (
     <div className="relative w-full ">
