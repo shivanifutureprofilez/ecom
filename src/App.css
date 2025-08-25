@@ -23,3 +23,11 @@
     font-size: 15px !important;
     font-weight: 600;
 }
+
+
+.product .productactions {
+     opacity: 0; transition: 0.5s;
+}
+.product:hover .productactions { 
+    opacity: 1; transition: 0.5s;
+}

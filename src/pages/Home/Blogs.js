@@ -3,38 +3,36 @@ import newArrival2 from '../../Assets/newArrival2.jpg';
 import Blog2 from '../../Assets/Blog2.jpg';
 import Blog3 from '../../Assets/Blog3.jpg';
 import Blog4 from '../../Assets/Blog4.jpg';
-
-import React from 'react'
-
+import { Link } from 'react-router-dom';
 function Blogs () {
     const blogs = [
     {
         img: newArrival2,
         date: "13th Sept 2025",
         label: "Chair",
-        title: "Chairs in horror",
-        body: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+        title: "Creating Your Dream Sanctuary: Inspirational Room Decor with Furnixar",
+        body: "Nibh purus integer elementum in. ipsuim for now dolor sit amet of this conqure varius . . .",
     },
     {
         img: Blog2,
         date: "13th Sept 2025",
         label: "Table",
-        title: "Chairs in horror",
-        body: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+        title: "From Drab to Fab: Room Makeover Inspiration by Furnixar",
+        body: "Nibh purus integer elementum in. ipsuim for now dolor sit amet of this conqure varius . . ."
     },
     {
         img: Blog3,
         date: "13th Sept 2025",
         label: "Shelf",
-        title: "Chairs in horror",
-        body: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+        title: "Small Space, Big Style: Room Decor Solutions from Furnixar",
+        body: "Nibh purus integer elementum in. ipsuim for now dolor sit amet of this conqure varius . . ."
     },
     {
         img: Blog4,
         date: "13th Sept 2025",
-        label: "Bed",
-        title: "Chairs in horror",
-        body: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+        label: "Vass",
+        title: "Innovative Room Decor: Unleashing Creativity with Furnixar",
+        body: "Nibh purus integer elementum in. ipsuim for now dolor sit amet of this conqure varius . . ."
     },
 ];
     return (
@@ -59,7 +57,11 @@ function Blogs () {
                             </span>
                         </div>
                         {/* <div className="text-gray-800 font-semibold">{blog.label}</div> */}
-                        <div className="text-gray-700">{blog.title}</div>
+                        <div className="text-gray-700 font-bold text-sm">
+                            <Link to={`/blog/${blog.label}`}>
+                            {blog.title}
+                            </Link>
+                            </div>
                         <div className="text-gray-500 text-sm">{blog.body}</div>
                     </div>
                 ))}

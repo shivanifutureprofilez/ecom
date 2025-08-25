@@ -1,16 +1,16 @@
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaHeart } from "react-icons/fa";
 
-function Footer() {
+function Footer({bg,text}) {
   return (
-    <footer className="bg-white py-8 px-4">
+    <footer className={`py-8 px-4 ${bg}`}>
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-start justify-between gap-8">
         {/* Logo & Description */}
         <div className="flex flex-col items-start min-w-[180px]">
           <div className="flex items-center space-x-2 mb-2">
             {/* <img src="/logo.svg" alt="Furnixar" className="h-8 w-8" /> */}
-            <span className="text-2xl font-bold text-gray-800">Furnixar</span>
+            <span className={`text-2xl font-bold ${text}`}>Furnixar</span>
           </div>
-          <p className="text-gray-600 text-sm max-w-[180px]">
+          <p className={`text-xs max-w-[180px] ${text}`}>
             Furnixar is a modern furniture template for an eCommerce website designed to help you create an impressive online store.
           </p>
         </div>
@@ -18,8 +18,8 @@ function Footer() {
         <div className="flex flex-wrap gap-8 md:gap-0">
           {/* Sitemap */}
           <div className="px-6 border-r border-dotted border-gray-300">
-            <h4 className="font-bold mb-2">Sitemap</h4>
-            <ul className="space-y-1 text-gray-700 text-sm">
+            <h4 className={`font-bold mb-2 ${text}`}>Sitemap</h4>
+            <ul className={`space-y-1 text-xs ${text}`} >
               <li>About</li>
               <li>Team</li>
               <li>Portfolio</li>
@@ -29,8 +29,8 @@ function Footer() {
           </div>
           {/* Others */}
           <div className="px-6 border-r border-dotted border-gray-300">
-            <h4 className="font-bold mb-2">Others</h4>
-            <ul className="space-y-1 text-gray-700 text-sm">
+            <h4 className={`font-bold mb-2 ${text}`}>Others</h4>
+            <ul className={`space-y-1 text-xs ${text}`}>
               <li>Shipping Method</li>
               <li>Payment Method</li>
               <li>My Account</li>
@@ -39,8 +39,8 @@ function Footer() {
           </div>
           {/* Social Media */}
           <div className="px-6 border-r border-dotted border-gray-300">
-            <h4 className="font-bold mb-2">Social Media</h4>
-            <ul className="space-y-1 text-gray-700 text-sm flex flex-col">
+            <h4 className={`font-bold mb-2 ${text}`} >Social Media</h4>
+            <ul className={`space-y-1 text-xs flex flex-col ${text}`}>
               <li className="flex items-center gap-2"><FaFacebookF /> Facebook</li>
               <li className="flex items-center gap-2"><FaTwitter /> Twitter</li>
               <li className="flex items-center gap-2"><FaInstagram /> Instagram</li>
@@ -49,8 +49,8 @@ function Footer() {
           </div>
           {/* Shop */}
           <div className="px-6 border-r border-dotted border-gray-300">
-            <h4 className="font-bold mb-2">Shop</h4>
-            <ul className="space-y-1 text-gray-700 text-sm">
+            <h4 className={`font-bold mb-2 ${text}`}>Shop</h4>
+            <ul className={`space-y-1 text-xs ${text}`}>
               <li>Shop</li>
               <li>Product Single</li>
               <li>Cart</li>
@@ -60,8 +60,8 @@ function Footer() {
           </div>
           {/* Customer Service */}
           <div className="px-6">
-            <h4 className="font-bold mb-2">Customer Service</h4>
-            <ul className="space-y-1 text-gray-700 text-sm">
+            <h4 className={`font-bold mb-2 ${text}`}>Customer Service</h4>
+            <ul className={`space-y-1 text-xs ${text}`}>
               <li>FAQs</li>
               <li>Terms & Condition</li>
               <li>Return Policy</li>
@@ -71,7 +71,7 @@ function Footer() {
         </div>
       </div>
       {/* Copyright */} 
-      <div className="mt-8 text-center text-gray-500 text-sm">
+      <div className={`mt-8 text-center text-xs ${text}`}>
         © 2025 Furnixar Develop with <FaHeart className="inline text-red-500 mx-1" /> By Shreethemes
       </div>
     </footer>

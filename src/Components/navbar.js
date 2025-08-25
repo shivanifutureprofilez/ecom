@@ -5,13 +5,13 @@ function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: "Home", href: "/home" },
-    { name: "Pages", href: "/pages" },
+    { name: "Home", href: "/" },
+    // { name: "Pages", href: "/pages" },
     { name: "Shop", href: "/shop" },
-    { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "/contact" },
+    { name: "Portfolio", href: "/portfolio" },
+    { name: "Contact", href: "/contact-us" },
     { name: "Login", href: '/login' },
-    { name: "Regiter", href: '/register' },
+    { name: "Register", href: '/register' },
   ];
 
   return (

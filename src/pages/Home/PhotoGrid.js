@@ -11,7 +11,8 @@ const PhotoGrid = () => {
         <div className='max-w-6xl mx-auto mt-12 px-4'>
             <div className='flex justify-between items-center'>
                 <div>
-                    <h2 className='text-3xl font-bold text-gray-800'>Best Seller</h2>
+                    <h2 className='text-3xl font-bold text-gray-800 pl-3'>Best Seller</h2>
+                    <br/>
                     <hr className="mb-8" />
                 </div>    
                 
