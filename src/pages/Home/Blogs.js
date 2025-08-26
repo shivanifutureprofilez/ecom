@@ -4,37 +4,37 @@ import Blog2 from '../../Assets/Blog2.jpg';
 import Blog3 from '../../Assets/Blog3.jpg';
 import Blog4 from '../../Assets/Blog4.jpg';
 import { Link } from 'react-router-dom';
-function Blogs () {
+function Blogs() {
     const blogs = [
-    {
-        img: newArrival2,
-        date: "13th Sept 2025",
-        label: "Chair",
-        title: "Creating Your Dream Sanctuary: Inspirational Room Decor with Furnixar",
-        body: "Nibh purus integer elementum in. ipsuim for now dolor sit amet of this conqure varius . . .",
-    },
-    {
-        img: Blog2,
-        date: "13th Sept 2025",
-        label: "Table",
-        title: "From Drab to Fab: Room Makeover Inspiration by Furnixar",
-        body: "Nibh purus integer elementum in. ipsuim for now dolor sit amet of this conqure varius . . ."
-    },
-    {
-        img: Blog3,
-        date: "13th Sept 2025",
-        label: "Shelf",
-        title: "Small Space, Big Style: Room Decor Solutions from Furnixar",
-        body: "Nibh purus integer elementum in. ipsuim for now dolor sit amet of this conqure varius . . ."
-    },
-    {
-        img: Blog4,
-        date: "13th Sept 2025",
-        label: "Vass",
-        title: "Innovative Room Decor: Unleashing Creativity with Furnixar",
-        body: "Nibh purus integer elementum in. ipsuim for now dolor sit amet of this conqure varius . . ."
-    },
-];
+        {
+            img: newArrival2,
+            date: "13th Sept 2025",
+            label: "Chair",
+            title: "Creating Your Dream Sanctuary: Inspirational Room Decor with Furnixar",
+            body: "Nibh purus integer elementum in. ipsuim for now dolor sit amet of this conqure varius . . .",
+        },
+        {
+            img: Blog2,
+            date: "13th Sept 2025",
+            label: "Table",
+            title: "From Drab to Fab: Room Makeover Inspiration by Furnixar",
+            body: "Nibh purus integer elementum in. ipsuim for now dolor sit amet of this conqure varius . . ."
+        },
+        {
+            img: Blog3,
+            date: "13th Sept 2025",
+            label: "Shelf",
+            title: "Small Space, Big Style: Room Decor Solutions from Furnixar",
+            body: "Nibh purus integer elementum in. ipsuim for now dolor sit amet of this conqure varius . . ."
+        },
+        {
+            img: Blog4,
+            date: "13th Sept 2025",
+            label: "Vass",
+            title: "Innovative Room Decor: Unleashing Creativity with Furnixar",
+            body: "Nibh purus integer elementum in. ipsuim for now dolor sit amet of this conqure varius . . ."
+        },
+    ];
     return (
         <section className="max-w-6xl mx-auto mt-12 px-4">
             <div className="flex items-center justify-between mb-6">
@@ -57,12 +57,12 @@ function Blogs () {
                             </span>
                         </div>
                         {/* <div className="text-gray-800 font-semibold">{blog.label}</div> */}
-                        <div className="text-gray-700 font-bold text-sm">
-                            <Link to={`/blog/${blog.label}`}>
-                            {blog.title}
+                        <h2 className="text-gray-700 font-bold text-sm line-clamp-2">
+                            <Link to={`/blog/chair`}>
+                                {blog.title}
                             </Link>
-                            </div>
-                        <div className="text-gray-500 text-sm">{blog.body}</div>
+                        </h2>
+                        <p className="text-gray-500 text-sm line-clamp-3">{blog.body}</p>
                     </div>
                 ))}
             </div>

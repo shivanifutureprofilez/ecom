@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FiSearch, FiHeart, FiShoppingCart, FiMoon, FiMenu, FiX } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -39,7 +40,9 @@ function Navbar() {
             <FiHeart className="text-xl cursor-pointer hover:text-yellow-600" />
           </div>
           <div className="relative">
+               <Link to="/cart"> 
             <FiShoppingCart className="text-xl cursor-pointer hover:text-yellow-600" />
+         </Link>
           </div>
           <FiMoon className="text-xl cursor-pointer hover:text-yellow-600" />
         </div>
@@ -79,7 +82,7 @@ function Navbar() {
           <div className="flex items-center space-x-4 mt-4">
             <FiSearch className="text-xl cursor-pointer hover:text-yellow-600" />
             <FiHeart className="text-xl cursor-pointer hover:text-yellow-600" />
-            <FiShoppingCart className="text-xl cursor-pointer hover:text-yellow-600" />
+            <Link to="/cart"> <FiShoppingCart className="text-xl cursor-pointer hover:text-yellow-600" /></Link>
             <FiMoon className="text-xl cursor-pointer hover:text-yellow-600" />
           </div>
         </div>
