@@ -13,18 +13,15 @@ export default function Home() {
     return (
         <div>
             <Navbar />
-
             <Banner />
-            <NewArrival bg={"bg-[#f5f5f5]"} text={"text-black"}/>
+            <NewArrival bg={"bg-[#f5f5f5]"} text={"text-black"} />
             <Importance />
             <PhotoGrid />
-            <NewArrival title={"Trending"}/>
+            <NewArrival title={"Trending"} />
             <HomeSwiper />
-            <Blogs/>
-            <Newsletter   bg={"bg-[#f5f5f5]"} text={"text-black"}/>
-           <Footer bg={"bg-white"} text={"text-gray-400"}/>
-            
-            
+            <Blogs />
+            <Newsletter bg={"bg-[#f5f5f5]"} text={"text-black"} />
+            <Footer bg={"bg-white"} text={"text-gray-400"} />
         </div>
     )
 }

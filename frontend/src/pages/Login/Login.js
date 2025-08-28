@@ -1,18 +1,20 @@
 import loginImg from '../../Assets/loginImg.jpg'
 
 
-const Login = () => {
+function Login()  {
+
+  
   return (
     <>
       <div className="min-h-screen flex justify-center ">
         <div className="p-[20px] w-full lg:p-[30px] flex flex-wrap md:flex-nowrap ">
-         
+
           <div className="w-full h-full relative hidden md:flex">
             <img src={loginImg} alt="Login" className="w-full h-full object-cover rounded-lg" />
           </div>
-         
+
           <div className="w-full relative md:pl-[50px] lg:pl-[70px] md:pt-[145px] lg:pt-[165px] ">
-            <h3  className="text-2xl md:text-3xl font-bold text-gray-800">Welcome To Furnixar!!</h3>
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-800">Welcome To Furnixar!!</h3>
             <p className="text-sm mt-3 md:mt-5">Buy & sale your exclusive product only on Furnixar</p>
 
             <form className="mt-6 ">
@@ -25,7 +27,7 @@ const Login = () => {
                            focus:ring-blue-500 focus:border-blue-500 py-3 px-4"
                 />
               </div>
-              <br/>
+              <br />
               <div>
                 <label className="font-medium text-base block mb-2">Password</label>
                 <input
@@ -35,12 +37,12 @@ const Login = () => {
                            focus:ring-blue-500 focus:border-blue-500 py-3 px-4"
                 />
               </div>
-              <br/>
+              <br />
               <div className="flex items-center">
                 <input type="checkbox" name="remember" className="mr-2" />
                 <span className="text-sm">Remember me</span>
               </div>
-              <br/>
+              <br />
               <button
                 type="submit"
                 className="w-full md:w-32 bg-yellow-700 text-white rounded-lg font-medium py-3"

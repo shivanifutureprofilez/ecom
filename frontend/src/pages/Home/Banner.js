@@ -7,11 +7,11 @@ export default function Banner() {
     <div className="relative w-full ">
       <img
         src={banner}
-        alt="banner"
+        alt="Home Banner"
         className="w-full h-[500px] object-cover md:h-auto"
       />
       <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-        <h5 className="text-3xl font-bold md:text-6xl text-left">
+        <h5 className="text-3xl font-semibold md:text-4xl xl:text-6xl text-left">
           <span><br /></span>A Collection of World <br />Top Class
           <span className=" text-yellow-500 Dancing italic"> Furniture</span>
           <br />
