@@ -28,7 +28,7 @@ function CategoryBar() {
   return (
     <>
 
-      <div className=" relative md:max-w-[1120px]  mx-auto top-[-80px] md:top-[-55px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-4 mt-2 pr-[30px] pl-[30px]">
+      <div className=" relative md:max-w-[1120px]  mx-auto top-[-80px] md:top-[-55px] grid  grid-cols-2 md:grid-cols-4 xl:grid-cols-4 mt-2 pr-[30px] pl-[30px]">
         {categories.map((cat, id) => (
           <div
             key={cat.title}
