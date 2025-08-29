@@ -1,6 +1,5 @@
 import toast, { Toaster } from 'react-hot-toast';
 import loginImg from '../../Assets/loginImg.jpg'
-import Listing from '../../Api/Listing';
 import { Api } from '../../Api/Api';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +24,7 @@ function Login()  {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     try{
-        if(regs.password == '' || regs.email == ''){
+        if(regs.password === '' || regs.email === ''){
           console.log("regs",regs)
           toast.error("All fields are required.");
           return false; 
@@ -113,9 +112,9 @@ function Login()  {
 
               <p className="text-sm mt-4">
                 Don't have an account yet?{" "}
-                <a href="/register" className="text-yellow-700 font-medium">
+                <link to="/register" className="text-yellow-700 font-medium">
                   Register
-                </a>
+                </link>
               </p>
             </form>
           </div>
