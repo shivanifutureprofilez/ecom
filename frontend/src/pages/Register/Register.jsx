@@ -1,54 +1,68 @@
 import { useState } from 'react';
 import loginImg from '../../Assets/loginImg.jpg'
 import Listing from '../../Api/Listing';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
-  const [Regs, setRegs] = useState({
-    email: "",
-    password: "",
-    name: ""
+  
+  const [regs, setRegs]=useState({
+    name:"",
+    email:"",
+    password:"",
+    confirmpassword:"",
   })
-
-  const handleChange = (e) => {
+  
+  const [loading, setLoading]=useState(false);
+  const handleChange = (e) =>{    //event object
     const name = e.target.name;
     const value = e.target.value;
-    setRegs(values => ({ ...values, [name]: value }))
+    setRegs(values => ({...values, [name]: value}));  //spread syntax
   }
-  const [loading, setLoading] = useState(false);
+  console.log("regs",regs)
 
-  const handleSubmit = async () => {
-    try {
-      if (loading) {
-        return false;
-      }
+
+  
+  const navigate = useNavigate();
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    try{
+        if(regs.password !== regs.confirmpassword){
+          toast.error("Password not matched");
+          return false; 
+        }
       
-      setLoading(true);
-      const main = new Listing();
-      const response = await main.Register(Regs);
-      console.log(response);
-      if (response?.data?.status) {
-        toast.success(response?.data?.message)
-      } else {
-        toast.error(response?.data?.message)
-      }
-
+        setLoading(true);
+        const main = new Listing();
+        const response = await main.Register(regs)
+        if(response?.data?.status)
+        {
+          toast.success(response?.data?.message);
+          navigate('/');
+        }
+        else{
+          toast.error(response?.data?.message);
+        }
+        setLoading(false);
+        setRegs({
+          name:"",
+          email:"",
+          password:""
+        })
+    }
+    catch (error){
+      console.log("error :", error );
+      toast.error(error.response.data.message || "Something went wrong");
       setLoading(false);
-      setRegs({
-        email: "",
-        name: "",
-        password: ""
-      })
-    } catch (error) {
-      console.log("error", error);
-      setLoading(false);
-      toast.error(error?.response?.data?.message)
     }
   };
 
-
   return (
     <>
+      <Toaster
+          position="top-right"
+          reverseOrder={false}
+        />
       <div className="min-h-screen  flex justify-center ">
         <div className="p-[20px] w-full lg:p-[30px] flex flex-wrap md:flex-nowrap ">
           <div className="w-full h-full relative hidden md:flex">
@@ -64,7 +78,7 @@ function Register() {
                   type="text"
                   placeholder="Enter Your Name "
                   name="name"
-                  value={Regs.name}
+                  value={regs.name}
                   onChange={handleChange}
                   required
                   className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
@@ -76,7 +90,7 @@ function Register() {
                   type="email"
                   name="email"
                   required
-                  value={Regs.email}
+                  value={regs.email}
                   onChange={handleChange}
                   placeholder="Enter Your Email Address"
                   className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
@@ -87,7 +101,7 @@ function Register() {
                 <label className="font-medium text-base block mb-2">Password</label>
                 <input
                   name="password"
-                  value={Regs.password}
+                  value={regs.password}
                   type="password"
                   onChange={handleChange}
                   required
@@ -99,9 +113,9 @@ function Register() {
 
               <div className='mt-2'>
                 <label className="font-medium text-base block mb-2">Confirm Password</label>
-                <input
-                  type="password"
-                  placeholder="*********"
+                <input onChange={handleChange}  
+                  type="password" name='confirmpassword'
+                  placeholder="*********" 
                   className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                            focus:ring-blue-500 focus:border-blue-500 py-3 px-4"
                 />

@@ -15,7 +15,8 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { MdAdd } from "react-icons/md";
 export default function HomeSwiper() {
   return (
-      <div className='p-[40px] bg-[#f5f5f5] mt-10 text-black items-center  flex  justify-center'>
+      <div className=' bg-[#f5f5f5]  mx-auto p-5  mt-10 text-black items-center  flex  justify-center'>
+        <div className="max-w-[940px] mx-auto p-5 md:p-0 bg-[#f5f5f5]">
       <Swiper
         spaceBetween={30}
         //  slidesPerView={8}
@@ -44,6 +45,7 @@ export default function HomeSwiper() {
           }
         }
       >
+        
       <SwiperSlide className=""><LiaSignatureSolid className=" mb-4  w-full mx-auto" size={100} /></SwiperSlide>
       <SwiperSlide><MdAdd className=" mb-4  text-center w-full mx-auto" size={100} /></SwiperSlide>
       <SwiperSlide><GiGooeySword className=" mb-4  text-center w-full mx-auto" size={100} /></SwiperSlide>
@@ -53,7 +55,9 @@ export default function HomeSwiper() {
       <SwiperSlide><GiBlackBridge className=" mb-4  text-center w-full mx-auto" size={100} /></SwiperSlide>
       <SwiperSlide><GiBinoculars className=" mb-4  text-center w-full mx-auto" size={100} /></SwiperSlide>
       <SwiperSlide><GiBrainTentacle className=" mb-4  text-center w-full mx-auto" size={100} /></SwiperSlide>
+        
     </Swiper>
-    </div >
+    </div>
+    </div>
   )
 }

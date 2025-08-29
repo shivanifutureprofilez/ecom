@@ -27,35 +27,22 @@ function CategoryBar() {
   ];
   return (
     <>
-      {/* <div className="relative top-[-64px] md:top-[-70px] flex flex-wrap justify-center items-center gap-[90px] mt-2 p-[1.5px] pt-0">
-      {categories.map((cat, id) => (
-        <div
-          key={cat.title}
-          className={`bg-white rounded-xl shadow p-2 md:w-[200px] md:p-6 mb-3 flex flex-col items-center ${
-            id !== categories.length-1 ? "border-r border-gray-200" : ""
-          }`}
-        >
-          {cat.icon}
-          <div className="text-[14px] md:text-[16px] font-normal text-gray-800">{cat.title}</div>
-          <div className="text-sm text-gray-500 mt-1">{cat.products}</div>
-          </div>
-        
-      ))}
-    </div> */}
-      <div className=" relative  mx-auto top-[-80px] md:top-[-55px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-4 mt-2 pr-[30px] pl-[30px]">
+
+      <div className=" relative md:max-w-[1120px]  mx-auto top-[-80px] md:top-[-55px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-4 mt-2 pr-[30px] pl-[30px]">
         {categories.map((cat, id) => (
           <div
             key={cat.title}
-            className={`bg-white p-3 rounded-xl flex justify-left gap-4  items-center ${id !== categories.length - 1 ? "  border-black border-dashed md:border-r-2" : ""
+            className={`bg-white p-3 rounded-xl flex justify-left gap-4  items-center ${id !== categories.length - 1 ? "   border-b border-bdr-clr md:border-r-2" : ""
               }`}
           >
+            <div className="md:max-w-[940px] md:mx-auto p-5 md:p-0">
             {cat.icon}
             <div>
               <h2 className="text-[16px] md:text-[16px] font-medium text-gray-800">{cat.title}</h2>
               <p className="text-sm text-gray-500 mt-1">{cat.products}</p>
             </div>
 
-
+              </div>
           </div>
 
         ))}

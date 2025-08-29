@@ -3,9 +3,9 @@ import newsletter from '../../Assets/newsletter.png';
 
 function Newsletter({ bg, text }) {
     return (
-        <div className={` ${bg} mt-6 mb-0 container mx-auto lg:max-w-[1440px] `}>
+        <div className={` ${bg} mt-6 mb-0 container mx-auto lg:max-w-full `}>
             <div className={`${bg}  dark:bg-dark-secondary py-10 px-5 md:px-7 lg:px-16 xl:px-24 xl:pb-24 sm:pt-0 `}>
-                <div className={`${bg} flex flex-wrap  justify-between`}>
+                <div className={`${bg} max-w-[1047px] mx-auto p-5 md:p-0  flex flex-wrap  justify-between`}>
                     <div className='flex justify-center flex-col md:px-16 md:py-14 '>
                         <h2 className={`font-bold text-3xl ${text}`}>Newsletter</h2>
                         <p className={`text-sm mt-5 ${text}`}>Stay in the loop with exclusive offers and updates. Subscribe<br /> to our newsletter for the latest trends and promotions.</p>

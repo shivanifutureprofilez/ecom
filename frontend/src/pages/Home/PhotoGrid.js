@@ -8,7 +8,7 @@ import newArrival5 from '../../Assets/newArrival5.jpg';
 const PhotoGrid = () => {
     const [calender, setCalender] = useState("day");
     return (
-        <div className='max-w-6xl mx-auto mt-12 px-4'>
+        <div className='mt-12 px-4 max-w-[940px] mx-auto p-5 md:p-0'>
             <div className='flex justify-between items-center'>
                 <div>
                     <h2 className='text-3xl font-bold text-gray-800 pl-3'>Best Seller</h2>
@@ -47,14 +47,14 @@ const PhotoGrid = () => {
                         <img src={newArrival4} alt="img1" className='mb-4'/>
                     </div>
                     <div className='flex-[50%] px-2'>
-                        <img src={newArrival5} alt="img1" className='md:h-[590px]'/>
+                        <img src={newArrival5} alt="img1" className='md:h-[490px]'/>
                     </div>
                 </div>
             )}
               {calender === "week" && (
                 <div className='md:flex md:flex-wrap px-2'>
                       <div className='flex-[50%] px-2'>
-                        <img src={newArrival5} alt="img1" className='md:h-[590px] mb-4'/>
+                        <img src={newArrival5} alt="img1" className='md:h-[490px] mb-4'/>
                     </div>
                     <div className='flex-[25%] px-2'>
                         <img src={newArrival1} alt="img1" className='mb-4'/>

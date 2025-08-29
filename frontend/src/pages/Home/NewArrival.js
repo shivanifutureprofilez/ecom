@@ -29,20 +29,22 @@ function NewArrival({ title = "New Arrival" }) {
     },
   ];
   return (
-    <section className="max-w-6xl mx-auto md:mt-0  px-4 ">
-      <div className="flex flex-wrap items-center justify-between mb-6">
+    <section className=" mx-auto md:mt-0  px-4   p-5 md:p-0">
+    <div className=" container mx-auto">
+      <div className="flex flex-wrap items-center justify-between mb-6  p-5 md:p-0">
         <h2 className="text-2xl md:text-3xl font-semibold leading-none text-gray-800 pt-9 ">{title}</h2>
         <a href="/collection" className="text-gray-700 pt-[40px] md:pt-[50px] font-medium hover:text-yellow-700 ">
           See All Collection <span>&rarr;</span>
         </a>
       </div>
       <hr className="mb-8" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8  p-5 md:p-0">
         {products.map((product) => (
           <ProductItem product={product} />
         ))}
       </div>
       <br /><br />
+    </div>
     </section>
   );
 }

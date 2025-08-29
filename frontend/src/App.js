@@ -17,10 +17,7 @@ function App() {
     <div className="App">
       <Router>
         <ScrollToTop />
-        <Toaster
-          position="top-right"
-          reverseOrder={false}
-        />
+        
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />

@@ -12,6 +12,15 @@ import Footer from '../../Components/Footer'
 export default function Home() {
     return (
         <div>
+{/* 
+            <div className='p-6 box flex items-center  bg-red-500 w-full'>
+                <div className='bg-yellow-500 h-[200px] '>sdfsdfsd</div>
+                <div className='bg-blue-500 h-[100px] '>sdfsdfsd</div>
+                <div className='bg-green-500 '>sdfsdfsd</div>
+            </div> */}
+
+
+
             <Navbar />
             <Banner />
             <NewArrival bg={"bg-[#f5f5f5]"} text={"text-black"} />
