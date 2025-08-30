@@ -18,21 +18,21 @@ function Navbar() {
   return (
     <div className="py-4 flex justiafy-center fixed  top-0 left-0 z-10 w-full">
       <div className="container m-auto">
-        <div className="  bg-[#ffffffa3] rounded-xl p-3 w-full shadow-md   ">
-          <div className="flex items-center justify-between px-4 md:px-8 py-3">
+        <div className="  bg-[#ffffffa3] rounded-xl p-1 md:p-3 w-full shadow-md   ">
+          <div className="flex items-center justify-between px-2 md:px-8 py-1 md:py-3">
 
             {/* Logo */}
             <div className="flex items-center space-x-2">
               {/* <span className="block text-2xl font-bold text-gray-800"> */}
-                <img className="max-w-[200px] w-[200px]" src="https://furnixar.vercel.app/assets/logo-DXjmQiDB.svg" /> 
+              <img className="max-w-[200px] w-[200px]" src="https://furnixar.vercel.app/assets/logo-DXjmQiDB.svg" />
               {/* </span> */}
             </div>
 
             <ul className="hidden md:flex space-x-6 text-gray-700 font-semibold">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <Link  to={link.href} className="hover:text-yellow-600">
-                    {link.name} 
+                  <Link to={link.href} className="hover:text-yellow-600">
+                    {link.name}
                   </Link>
                 </li>
               ))}
@@ -44,9 +44,9 @@ function Navbar() {
                 <FiHeart className="text-xl cursor-pointer hover:text-yellow-600" />
               </div>
               <div className="relative">
-                  <Link to="/cart"> 
-                <FiShoppingCart className="text-xl cursor-pointer hover:text-yellow-600" />
-            </Link>
+                <Link to="/cart">
+                  <FiShoppingCart className="text-xl cursor-pointer hover:text-yellow-600" />
+                </Link>
               </div>
               <FiMoon className="text-xl cursor-pointer hover:text-yellow-600" />
             </div>
@@ -92,7 +92,6 @@ function Navbar() {
             </div>
           )}
         </div>
-
       </div>
     </div>
   );

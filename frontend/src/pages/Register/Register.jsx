@@ -2,56 +2,70 @@ import { useState } from 'react';
 import loginImg from '../../Assets/loginImg.jpg'
 import Listing from '../../Api/Listing';
 import toast, { Toaster } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Register() {
-  
-  const [regs, setRegs]=useState({
-    name:"",
-    email:"",
-    password:"",
-    confirmpassword:"",
+
+  const [regs, setRegs] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmpassword: "",
   })
-  
-  const [loading, setLoading]=useState(false);
-  const handleChange = (e) =>{    //event object
+
+  const [loading, setLoading] = useState(false);
+  const [showPasswordRules, setShowPasswordRules] = useState(false);
+
+  const handleFocus = () => {
+    setShowPasswordRules(true);
+  };
+
+  const handleFocusFalse = () => {
+    setShowPasswordRules(false);
+  };
+
+  const handleChange = (e) => {    //event object
     const name = e.target.name;
     const value = e.target.value;
-    setRegs(values => ({...values, [name]: value}));  //spread syntax
+    setRegs(values => ({ ...values, [name]: value }));  //spread syntax
   }
-  console.log("regs",regs)
 
-
-  
   const navigate = useNavigate();
-  const handleSubmit = async (e) =>{
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-        if(regs.password !== regs.confirmpassword){
-          toast.error("Password not matched");
-          return false; 
-        }
-      
-        setLoading(true);
-        const main = new Listing();
-        const response = await main.Register(regs)
-        if(response?.data?.status)
-        {
-          toast.success(response?.data?.message);
-          navigate('/');
-        }
-        else{
-          toast.error(response?.data?.message);
-        }
-        setLoading(false);
-        setRegs({
-          name:"",
-          email:"",
-          password:""
-        })
+    try {
+      if (!passwordRegex.test(regs.password)) {
+        toast.error(
+          "Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character."
+        );
+        return false;
+      }
+      if (regs.password !== regs.confirmpassword) {
+        toast.error("Password not matched");
+        return false;
+      }
+
+      setLoading(true);
+      const main = new Listing();
+      const response = await main.Register(regs)
+      if (response?.data?.status) {
+        toast.success(response?.data?.message);
+        navigate('/');
+      }
+      else {
+        toast.error(response?.data?.message);
+      }
+      setLoading(false);
+      setRegs({
+        name: "",
+        email: "",
+        password: ""
+      })
     }
-    catch (error){
-      console.log("error :", error );
+    catch (error) {
+      console.log("error :", error);
       toast.error(error.response.data.message || "Something went wrong");
       setLoading(false);
     }
@@ -60,9 +74,9 @@ function Register() {
   return (
     <>
       <Toaster
-          position="top-right"
-          reverseOrder={false}
-        />
+        position="top-right"
+        reverseOrder={false}
+      />
       <div className="min-h-screen  flex justify-center ">
         <div className="p-[20px] w-full lg:p-[30px] flex flex-wrap md:flex-nowrap ">
           <div className="w-full h-full relative hidden md:flex">
@@ -81,6 +95,7 @@ function Register() {
                   value={regs.name}
                   onChange={handleChange}
                   required
+                  onFocus={handleFocusFalse}
                   className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                            focus:ring-blue-500 focus:border-blue-500 py-3 px-4"  />
               </div>
@@ -95,29 +110,55 @@ function Register() {
                   placeholder="Enter Your Email Address"
                   className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                            focus:ring-blue-500 focus:border-blue-500 py-3 px-4"
+                  onFocus={handleFocusFalse}
                 />
               </div>
-              <div className='mt-2'>
+              <div className="mt-2">
                 <label className="font-medium text-base block mb-2">Password</label>
                 <input
                   name="password"
                   value={regs.password}
                   type="password"
                   onChange={handleChange}
+                  onFocus={handleFocus}
                   required
+
                   placeholder="*********"
                   className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
-                           focus:ring-blue-500 focus:border-blue-500 py-3 px-4"
+                   focus:ring-blue-500 focus:border-blue-500 py-3 px-4"
                 />
+
+                {showPasswordRules && (
+                  <div className="container mx-auto mt-3">
+                    <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+                      <li className={/[a-z]/.test(regs.password) ? "text-green-600" : ""}>
+                        A lowercase letter
+                      </li>
+                      <li className={/[A-Z]/.test(regs.password) ? "text-green-600" : ""}>
+                        A capital (uppercase) letter
+                      </li>
+                      <li className={/[0-9]/.test(regs.password) ? "text-green-600" : ""}>
+                        A number
+                      </li>
+                      <li className={/[^A-Za-z0-9]/.test(regs.password) ? "text-green-600" : ""}>
+                        A special character
+                      </li>
+                      <li className={regs.password.length >= 8 ? "text-green-600" : ""}>
+                        Minimum 8 characters
+                      </li>
+                    </ul>
+                  </div>
+                )}
               </div>
 
               <div className='mt-2'>
                 <label className="font-medium text-base block mb-2">Confirm Password</label>
-                <input onChange={handleChange}  
+                <input onChange={handleChange}
                   type="password" name='confirmpassword'
-                  placeholder="*********" 
+                  placeholder="*********"
                   className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                            focus:ring-blue-500 focus:border-blue-500 py-3 px-4"
+                  onFocus={handleFocusFalse}
                 />
               </div>
               <div className="flex items-center mt-2 ">
@@ -135,9 +176,9 @@ function Register() {
               </button>
               <p className="text-sm mt-4">
                 Already have an account!!{" "}
-                <link to="/login" className="text-yellow-700 font-medium">
+                <Link to="/login" className="text-yellow-700 font-medium">
                   Login
-                </link>
+                </Link>
               </p>
             </form>
           </div>

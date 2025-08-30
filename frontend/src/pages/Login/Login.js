@@ -2,66 +2,60 @@ import toast, { Toaster } from 'react-hot-toast';
 import loginImg from '../../Assets/loginImg.jpg'
 import { Api } from '../../Api/Api';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-
-function Login()  {
-
-  const [regs, setRegs]=useState({
-    email:"",
-    password:"",
+import { Link, useNavigate } from 'react-router-dom';
+function Login() {
+  const [regs, setRegs] = useState({
+    email: "",
+    password: "",
   })
-  
-  console.log("regs",regs)
-  const [loading, setLoading]=useState(false);
-  const handleChange = (e) =>{    //event object
+
+  const [loading, setLoading] = useState(false);
+  const handleChange = (e) => {    //event object
     const name = e.target.name;
     const value = e.target.value;
-    setRegs(values => ({...values, [name]: value}));  //spread syntax
+    setRegs(values => ({ ...values, [name]: value }));  //spread syntax
   }
-  
-  const navigate = useNavigate();
-  const handleSubmit = async (e) =>{
-    e.preventDefault();
-    try{
-        if(regs.password === '' || regs.email === ''){
-          console.log("regs",regs)
-          toast.error("All fields are required.");
-          return false; 
-        }
-        //if(regs.password==)
-        setLoading(true);
-        const response = Api.post("/login", regs)
 
-        response.then((res)=>{
-          if(res?.data?.status)
-          {
-            toast.success(res?.data?.message);
-            localStorage.setItem('token', res?.data?.token)
-            navigate('/');
-          }
-          else{
-            toast.error(res?.data?.message);
-          }
-          setRegs({
-            name:"",
-            email:"",
-            password:""
-          })
-          setLoading(false);
-        }).catch((err)=>{
-          console.log("Hello from catch block", err);
-          toast.error(err?.response?.data?.message); 
-          setLoading(false);
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (regs.password === '' || regs.email === '') {
+        console.log("regs", regs)
+        toast.error("All fields are required.");
+        return false;
+      }
+      //if(regs.password==)
+      setLoading(true);
+      const response = Api.post("/login", regs)
+      response.then((res) => {
+        if (res?.data?.status) {
+          toast.success(res?.data?.message);
+          localStorage.setItem('token', res?.data?.token)
+          navigate('/');
+        }
+        else {
+          toast.error(res?.data?.message);
+        }
+        setRegs({
+          name: "",
+          email: "",
+          password: ""
         })
+        setLoading(false);
+      }).catch((err) => {
+        console.log("Hello from catch block", err);
+        toast.error(err?.response?.data?.message);
+        setLoading(false);
+      })
     }
-    catch (error){
-      console.log("error :", error );
+    catch (error) {
+      console.log("error :", error);
       toast.error(error.response.data.message || "Something went wrong");
       setLoading(false);
     }
   };
-  
+
   return (
     <>
       <div className="min-h-screen flex justify-center ">
@@ -99,11 +93,11 @@ function Login()  {
               </div>
               <br />
               <div className="flex items-center">
-                <input type="checkbox" name="remember" className="mr-2" required/>
+                <input type="checkbox" name="remember" className="mr-2" required />
                 <span className="text-sm">Remember me</span>
               </div>
               <br />
-              <button 
+              <button
                 type="submit"
                 className="w-full md:w-32 bg-yellow-700 text-white rounded-lg font-medium py-3"
               >
@@ -112,18 +106,18 @@ function Login()  {
 
               <p className="text-sm mt-4">
                 Don't have an account yet?{" "}
-                <link to="/register" className="text-yellow-700 font-medium">
+                <Link to="/register" className="text-yellow-700 font-medium">
                   Register
-                </link>
+                </Link>
               </p>
             </form>
           </div>
         </div>
       </div>
       <Toaster
-          position="top-right"
-          reverseOrder={false}
-        />
+        position="top-right"
+        reverseOrder={false}
+      />
     </>
   )
 }

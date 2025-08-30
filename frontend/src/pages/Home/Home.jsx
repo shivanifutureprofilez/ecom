@@ -30,7 +30,7 @@ export default function Home() {
             <HomeSwiper />
             <Blogs />
             <Newsletter bg={"bg-[#f5f5f5]"} text={"text-black"} />
-            <Footer bg={"bg-white"} text={"text-gray-400"} />
+            <Footer bg={"bg-white"} text={"text-black"} />
         </div>
     )
 }

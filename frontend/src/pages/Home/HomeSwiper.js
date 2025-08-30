@@ -15,8 +15,10 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { MdAdd } from "react-icons/md";
 export default function HomeSwiper() {
   return (
-      <div className=' bg-[#f5f5f5]  mx-auto p-5  mt-10 text-black items-center  flex  justify-center'>
-        <div className="max-w-[940px] mx-auto p-5 md:p-0 bg-[#f5f5f5]">
+    <div className="bg-[#f5f5f5]">
+    {/* <div className="container mx-auto bg-[#f5f5f5]"> */}
+      <div className=' bg-[#f5f5f5] container mx-auto p-5  mt-10 text-black  flex justify-center item-center '>
+        <div className="max-w-full    bg-[#f5f5f5]">
       <Swiper
         spaceBetween={30}
         //  slidesPerView={8}
@@ -58,6 +60,8 @@ export default function HomeSwiper() {
         
     </Swiper>
     </div>
+    </div>
+    {/* </div> */}
     </div>
   )
 }

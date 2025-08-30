@@ -4,20 +4,21 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaHeart } from "reac
 function Footer({bg,text}) {
   return (
     <>
+    <div className="container mx-auto">
       <footer className={`py-8 px-4 ${bg}`}>
-        <div className="mx-auto flex flex-col md:flex-row md:items-start justify-between gap-8 max-w-[940px]  p-5 md:p-0 ">
+        <div className="mx-auto flex flex-col md:flex-row md:items-start justify-between gap-8    ">
           {/* Logo & Description */}
-          <div className="flex flex-col items-start min-w-[180px] max-w-[940px] mx-auto p-5 md:p-0 ">
+          <div className="flex flex-col items-start min-w-[180px]  p-5 md:p-0 ">
             <div className="flex items-center space-x-2 mb-2">
               {/* <img src="/logo.svg" alt="Furnixar" className="h-8 w-8" /> */}
-              <span className={`text-2xl font-bold ${text}`}>Furnixar</span>
+             <img className="max-w-[200px] w-[200px]" src="https://furnixar.vercel.app/assets/logo-DXjmQiDB.svg" />
             </div>
-            <p className={`text-xs max-w-[180px] ${text}`}>
+            <p className={`text-sm max-w-[380px] text-black`}>
               Furnixar is a modern furniture template for an eCommerce website designed to help you create an impressive online store.
             </p>
           </div>
           {/* Footer Columns */}
-          <div className="flex flex-wrap gap-8 md:gap-0 max-w-[940px] mx-auto p-5 md:p-0 ">
+          <div className="flex flex-wrap gap-8 md:gap-0  p-5 md:p-0 ">
             {/* Sitemap */}
             <div className="px-6 border-r border-dotted border-gray-300">
               <h4 className={`font-bold mb-2 ${text}`}>Sitemap</h4>
@@ -81,6 +82,7 @@ function Footer({bg,text}) {
           position="top-right"
           reverseOrder={false}
         />
+      </div>
     </>
   )
 }

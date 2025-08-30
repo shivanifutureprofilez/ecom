@@ -36,15 +36,16 @@ function Blogs() {
         },
     ];
     return (
-        <section className=" mt-12 px-4 max-w-[940px] mx-auto p-5 md:p-0 ">
-            <div className="flex items-center justify-between mb-6 max-w-[940px] p-4 md:p-0">
+        <div className='container mx-auto'>
+        <section className=" mt-12  p-5 md:p-0 ">
+            <div className="flex items-center justify-between mb-6 p-4 md:p-0">
                 <h2 className="text-2xl md:text-3xl font-semibold leading-none text-gray-800 pt-9">Latest Blogs</h2>
                 <a href="/collection" className="text-gray-700 pt-[40px] md:pt-[50px] font-medium hover:text-yellow-700">
                     See All Collection <span>&rarr;</span>
                 </a>
             </div>
             <hr className="mb-8" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-[940px] p-5 md:p-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8  p-5 md:p-0">
                 {blogs.map((blog) => (
                     <div key={blog.label}>
                         <img src={blog.img} alt={blog.label} className="rounded-lg w-full h-64 object-cover mb-4 shadow" />
@@ -67,6 +68,7 @@ function Blogs() {
                 ))}
             </div>
         </section>
+        </div>
     );
 }
 
