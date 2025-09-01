@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Banner from "./Banner"
 import CategoryBar from './CategoryBar'
 import NewArrival from './NewArrival'
@@ -9,7 +9,11 @@ import { Importance } from './Importance'
 import Navbar from '../../Components/navbar'
 import Blogs from './Blogs'
 import Footer from '../../Components/Footer'
+import { MyContext } from '../../context/UserContext'
 export default function Home() {
+
+    const {user} = useContext(MyContext);
+    console.log("user",user)
     return (
         <div>
 {/* 
@@ -21,7 +25,11 @@ export default function Home() {
 
 
 
-            <Navbar />
+            <Navbar>
+dsadsadasdasd
+            </Navbar>
+
+
             <Banner />
             <NewArrival bg={"bg-[#f5f5f5]"} text={"text-black"} />
             <Importance />

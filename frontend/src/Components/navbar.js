@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FiSearch, FiHeart, FiShoppingCart, FiMoon, FiMenu, FiX } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Api } from "../Api/Api";
+import { MyContext } from "../context/UserContext";
+import toast from "react-hot-toast";
 
-function Navbar() {
+function Navbar({children}) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  const {setUser, user} = useContext(MyContext)
   const navLinks = [
     { name: "Home", href: "/" },
     // { name: "Pages", href: "/pages" },
@@ -14,11 +17,43 @@ function Navbar() {
     { name: "Login", href: '/login' },
     { name: "Register", href: '/register' },
   ];
+  const navigate = useNavigate();
+
+  const GetUser = () => { 
+     const fetch = Api.get('/myprofile');
+     fetch.then((res)=>{ 
+       console.log('res',res)
+        if(res.data.status){
+          setUser(res.data.user)
+          navigate('/');
+        } else { 
+          // setUser(null);
+          navigate('/login');
+          toast.error("You must have to login first.")
+        }
+     }).catch((err)=>{
+       console.log('err',err)
+        navigate('/login');
+        toast.error("You must have to login first. Something went wrong")
+     })
+  }
+
+  const logout = () => { 
+    localStorage.removeItem("token");
+    setTimeout(()=>{
+      navigate('/login');
+      toast.success("Logged out successfully.")
+    },1000)
+  }
+
+  useEffect(()=>{ 
+    GetUser();
+  },[]);
 
   return (
     <div className="py-4 flex justiafy-center fixed  top-0 left-0 z-10 w-full">
       <div className="container m-auto">
-        <div className="  bg-[#ffffffa3] rounded-xl p-1 md:p-3 w-full shadow-md   ">
+        <div className="bg-[#ffffffa3] rounded-xl p-1 md:p-3 w-full shadow-md">
           <div className="flex items-center justify-between px-2 md:px-8 py-1 md:py-3">
 
             {/* Logo */}
@@ -39,16 +74,28 @@ function Navbar() {
             </ul>
 
             <div className="hidden md:flex items-center space-x-4">
-              <FiSearch className="text-xl cursor-pointer hover:text-yellow-600" />
+              {/* <FiSearch className="text-xl cursor-pointer hover:text-yellow-600" />
               <div className="relative">
                 <FiHeart className="text-xl cursor-pointer hover:text-yellow-600" />
-              </div>
-              <div className="relative">
-                <Link to="/cart">
+              </div> */}
+
+              {user ? 
+              <>
+              <div className="relative space-x-4">
+                {/* <Link to="/cart">
                   <FiShoppingCart className="text-xl cursor-pointer hover:text-yellow-600" />
-                </Link>
+                </Link> */}
+                <button onClick={logout} className="text-gray-700 font-semibold cursor-pointer hover:text-yellow-600">My Profile</button>
+                <button onClick={logout} className="text-gray-700 font-semibold cursor-pointer hover:text-yellow-600">Logout</button>
               </div>
-              <FiMoon className="text-xl cursor-pointer hover:text-yellow-600" />
+              </>
+              :
+              <>
+              <Link to="/login">
+                  Login
+                </Link>
+              </>}
+              {/* <FiMoon className="text-xl cursor-pointer hover:text-yellow-600" /> */}
             </div>
 
             <div className="md:hidden">
@@ -84,7 +131,7 @@ function Navbar() {
 
 
               <div className="flex items-center space-x-4 mt-4">
-                <FiSearch className="text-xl cursor-pointer hover:text-yellow-600" />
+                <FiSearch className="text-xl cursor-pointer hover:text-yellow-600" /> 
                 <FiHeart className="text-xl cursor-pointer hover:text-yellow-600" />
                 <Link to="/cart"> <FiShoppingCart className="text-xl cursor-pointer hover:text-yellow-600" /></Link>
                 <FiMoon className="text-xl cursor-pointer hover:text-yellow-600" />

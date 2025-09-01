@@ -1,14 +1,19 @@
 import toast, { Toaster } from 'react-hot-toast';
 import loginImg from '../../Assets/loginImg.jpg'
 import { Api } from '../../Api/Api';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import  { MyContext } from '../../context/UserContext';
+
 function Login() {
   const [regs, setRegs] = useState({
     email: "",
     password: "",
   })
 
+  const {setUser} = useContext(MyContext)
+
+  // console.log("user",user)
   const [loading, setLoading] = useState(false);
   const handleChange = (e) => {    //event object
     const name = e.target.name;
@@ -29,8 +34,9 @@ function Login() {
       setLoading(true);
       const response = Api.post("/login", regs)
       response.then((res) => {
-        if (res?.data?.status) {
+        if(res?.data?.status) {
           toast.success(res?.data?.message);
+          setUser(res.data.user || null);
           localStorage.setItem('token', res?.data?.token)
           navigate('/');
         }

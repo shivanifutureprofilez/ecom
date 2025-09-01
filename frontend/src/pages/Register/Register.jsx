@@ -3,6 +3,7 @@ import loginImg from '../../Assets/loginImg.jpg'
 import Listing from '../../Api/Listing';
 import toast, { Toaster } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
+import { Api } from '../../Api/Api';
 
 function Register() {
 
@@ -49,7 +50,7 @@ function Register() {
 
       setLoading(true);
       const main = new Listing();
-      const response = await main.Register(regs)
+      const response = await Api.post('/signup', regs)
       if (response?.data?.status) {
         toast.success(response?.data?.message);
         navigate('/');
