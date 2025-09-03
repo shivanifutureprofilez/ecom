@@ -12,6 +12,7 @@ import ScrollToTop from './ScrollToTop';
 import Cart from './pages/cart/Cart';
 import { Toaster } from 'react-hot-toast';
 import UserProvider from './context/UserContext';
+import Profile from './pages/my-profile/Profile';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/blog" element={<Blog />}></Route>
             <Route path="/blog/:label" element={<BlogDetails />}></Route>
             <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/myprofile" element={<Profile/>}></Route>
           </Routes>
         </Router>
       </UserProvider>

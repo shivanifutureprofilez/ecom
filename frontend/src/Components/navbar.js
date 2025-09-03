@@ -5,50 +5,49 @@ import { Api } from "../Api/Api";
 import { MyContext } from "../context/UserContext";
 import toast from "react-hot-toast";
 
-function Navbar({children}) {
+function Navbar({ children }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const {setUser, user} = useContext(MyContext)
+  const { setUser, user } = useContext(MyContext)
   const navLinks = [
     { name: "Home", href: "/" },
     // { name: "Pages", href: "/pages" },
     { name: "Shop", href: "/shop" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "Contact", href: "/contact-us" },
-    { name: "Login", href: '/login' },
-    { name: "Register", href: '/register' },
+    //{ name: "Login", href: '/login' },
+    //{ name: "Register", href: '/register' },
   ];
   const navigate = useNavigate();
 
-  const GetUser = () => { 
-     const fetch = Api.get('/myprofile');
-     fetch.then((res)=>{ 
-       console.log('res',res)
-        if(res.data.status){
-          setUser(res.data.user)
-          navigate('/');
-        } else { 
-          // setUser(null);
-          navigate('/login');
-          toast.error("You must have to login first.")
-        }
-     }).catch((err)=>{
-       console.log('err',err)
+  const GetUser = () => {
+    const fetch = Api.get('/myprofile');
+    fetch.then((res) => {
+      console.log('res', res)
+      if (res.data.status) {
+        setUser(res.data.user)
+      } else {
+        // setUser(null);
         navigate('/login');
-        toast.error("You must have to login first. Something went wrong")
-     })
+        toast.error("You must have to login first.")
+      }
+    }).catch((err) => {
+      console.log('err', err)
+      navigate('/login');
+      toast.error("You must have to login first. Something went wrong")
+    })
   }
 
-  const logout = () => { 
+  const logout = () => {
     localStorage.removeItem("token");
-    setTimeout(()=>{
+    setTimeout(() => {
       navigate('/login');
       toast.success("Logged out successfully.")
-    },1000)
+    }, 1000)
   }
 
-  useEffect(()=>{ 
+  useEffect(() => {
     GetUser();
-  },[]);
+  }, []);
 
   return (
     <div className="py-4 flex justiafy-center fixed  top-0 left-0 z-10 w-full">
@@ -79,22 +78,22 @@ function Navbar({children}) {
                 <FiHeart className="text-xl cursor-pointer hover:text-yellow-600" />
               </div> */}
 
-              {user ? 
-              <>
-              <div className="relative space-x-4">
-                {/* <Link to="/cart">
+              {user ?
+                <>
+                  <div className="relative space-x-4">
+                    {/* <Link to="/cart">
                   <FiShoppingCart className="text-xl cursor-pointer hover:text-yellow-600" />
                 </Link> */}
-                <button onClick={logout} className="text-gray-700 font-semibold cursor-pointer hover:text-yellow-600">My Profile</button>
-                <button onClick={logout} className="text-gray-700 font-semibold cursor-pointer hover:text-yellow-600">Logout</button>
-              </div>
-              </>
-              :
-              <>
-              <Link to="/login">
-                  Login
-                </Link>
-              </>}
+                    <Link to="/myprofile" className="text-gray-700 font-semibold cursor-pointer hover:text-yellow-600">My Profile</Link>
+                    <button onClick={logout} className="text-gray-700 font-semibold cursor-pointer hover:text-yellow-600">Logout</button>
+                  </div>
+                </>
+                :
+                <>
+                  <Link to="/login">
+                    Login
+                  </Link>
+                </>}
               {/* <FiMoon className="text-xl cursor-pointer hover:text-yellow-600" /> */}
             </div>
 
@@ -131,7 +130,7 @@ function Navbar({children}) {
 
 
               <div className="flex items-center space-x-4 mt-4">
-                <FiSearch className="text-xl cursor-pointer hover:text-yellow-600" /> 
+                <FiSearch className="text-xl cursor-pointer hover:text-yellow-600" />
                 <FiHeart className="text-xl cursor-pointer hover:text-yellow-600" />
                 <Link to="/cart"> <FiShoppingCart className="text-xl cursor-pointer hover:text-yellow-600" /></Link>
                 <FiMoon className="text-xl cursor-pointer hover:text-yellow-600" />
