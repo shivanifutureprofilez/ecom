@@ -70,6 +70,11 @@ function Navbar({ children }) {
                   </Link>
                 </li>
               ))}
+                {user?.isAdmin == 1 ? <li  >
+                  <Link to={'/admin'} className="hover:text-yellow-600">
+                    Add Product
+                  </Link>
+                </li> : ''}
             </ul>
 
             <div className="hidden md:flex items-center space-x-4">
@@ -84,7 +89,7 @@ function Navbar({ children }) {
                     {/* <Link to="/cart">
                   <FiShoppingCart className="text-xl cursor-pointer hover:text-yellow-600" />
                 </Link> */}
-                    <Link to="/myprofile" className="text-gray-700 font-semibold cursor-pointer hover:text-yellow-600">My Profile</Link>
+                    <Link to="/myprofile" className="  font-semibold cursor-pointer hover:text-yellow-600 capitalize text-blue-500">Hi, {user?.name}</Link>
                     <button onClick={logout} className="text-gray-700 font-semibold cursor-pointer hover:text-yellow-600">Logout</button>
                   </div>
                 </>

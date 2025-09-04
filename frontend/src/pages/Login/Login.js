@@ -99,7 +99,7 @@ function Login() {
               </div>
               <br />
               <div className="flex items-center">
-                <input type="checkbox" name="remember" className="mr-2" required />
+                <input type="checkbox" name="remember" className="mr-2"  />
                 <span className="text-sm">Remember me</span>
               </div>
               <br />

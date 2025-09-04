@@ -1,15 +1,25 @@
 import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MyContext } from '../../context/UserContext';
 import UserProfile from './UserProfile';
-import Account from './Account';
 import EditAccount from './EditAccount';
 import Wishlist from './Wishlist';
+import toast from "react-hot-toast";
+import Address from './Address';
+import OrderHistory from './OrderHistory';
 
 
 function ProfileSections() {
     const { setUser, user } = useContext(MyContext);
     const [tags,setTags] = useState("profile");
+    const navigate = useNavigate();
+    const logout = () => {
+    localStorage.removeItem("token");
+    setTimeout(() => {
+      navigate('/login');
+      toast.success("Logged out successfully.")
+    }, 1000)
+  }
 
     return (
         <div className='container mx-auto md:mt-[100px]  '>
@@ -19,8 +29,8 @@ function ProfileSections() {
                             <p className='leading-10 border-b text-black font-semibold text-[14px] cursor-pointer md:text-[18px] hover:text-yellow-700 active:underline ' onClick={()=>{setTags("profile")}}>
                                 My Profile
                             </p>
-                            <p className='leading-10 border-b text-black font-semibold text-[14px] cursor-pointer md:text-[18px] hover:text-yellow-700 active:underline ' onClick={()=>{setTags("account")}}>
-                                My Account
+                            <p className='leading-10 border-b text-black font-semibold text-[14px] cursor-pointer md:text-[18px] hover:text-yellow-700 active:underline ' onClick={()=>{setTags("address")}}>
+                                My Addresses
                             </p>
                             <p className='leading-10 border-b text-black font-semibold text-[14px] cursor-pointer md:text-[18px] hover:text-yellow-700 active:underline ' onClick={()=>{setTags("edit")}}>
                                 Edit Account
@@ -31,7 +41,7 @@ function ProfileSections() {
                             <p className='leading-10 border-b text-black font-semibold text-[14px] cursor-pointer md:text-[18px] hover:text-yellow-700 active:underline ' onClick = {()=>{setTags("wishlist")}}>
                                 Wishlist
                             </p>
-                            <p className='leading-10 border-b text-black font-semibold text-[14px] cursor-pointer md:text-[18px] hover:text-yellow-700 active:underline'>
+                            <p className='leading-10 border-b text-black font-semibold text-[14px] cursor-pointer md:text-[18px] hover:text-yellow-700 active:underline' onClick = {()=>{setTags("logout")}}>
                                 Logout
                             </p>
                     </div>
@@ -39,8 +49,8 @@ function ProfileSections() {
                 <div className='w-full md:w-3/4 '>
                     {tags === "profile" && (
                     <UserProfile user={user} />)}
-                    {tags === "account" && (
-                        <Account user={user}/>
+                    {tags === "address" && (
+                        <Address user={user}/>
                     )}
                     {tags === "edit" && (
                         <EditAccount user={user}/>
@@ -48,6 +58,13 @@ function ProfileSections() {
                     {tags === "wishlist" && (
                         <Wishlist user={user}/>
                     )}
+                    {tags === "history" && (
+                        <OrderHistory user={user}/>
+                    )}
+                    {tags === "logout" && (() => {
+                        logout();
+                        return null;
+                    })()}
                 </div>
             </div>
         </div>
