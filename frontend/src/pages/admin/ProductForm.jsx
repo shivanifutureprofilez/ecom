@@ -1,8 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { MdOutlineNoteAdd } from "react-icons/md";
+import { Api } from '../../Api/Api';
+import { useNavigate } from 'react-router-dom';
 
 function ProductForm() {
+    const [items, setItems] = useState ({
+        name: "",
+        product_type: "",
+        brand_name: "",
+        price:"",
+        image:"",
+        content:""
+      })
+
+      const handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setItems(values => ({... values, [name]: value}));  //spread operator
+      }
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        const response = Api.post('/add-product', items);
+
+      }
+    catch (error) {
+      console.log("error :", error);
+      toast.error(error.response.data.message || "Something went wrong");
+      //setLoading(false);
+    }
+  };
     return (
         <div className='container mx-auto'>
             <div>
@@ -29,7 +58,7 @@ function ProductForm() {
                                             <label className="font-medium text-base block mb-2">Product Type</label>
                                             <select className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                                    focus:ring-blue-500 focus:border-blue-500 py-3 px-4 ">
-                                                <option className="pl-1 pr-1" value="one">Interior</option>
+                                                <option className="pl-1 pr-1" value="Interior">Interior</option>
                                                 <option className="pl-2 pr-2" value="two">Chair </option>
                                                 <option className="pl-2 pr-2" value="three">Table</option>
                                                 <option className="pl-2 pr-2" value="four">Lamp</option>

@@ -1,25 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-function Filter() {
+function Filter({setCategory, category}) {
     return (
-        <div className='max-w-6xl mt-12 mx-auto px-4'>
-        <div className='container max-w-6xl mx-auto  pb-8 md:pb-[50px]'>
+        <div className='container mt-12 mx-auto'>
+        <div className='container mx-auto  pb-8 md:pb-[50px]'>
             <div className='lg:flex justify-between items-center flex-wrap '>
 
                 <div className='w-full md:w-auto py-2 '>
                     <h2 className='font-medium text-base block mb-2'>Choose Category</h2>
                     <div className='flex items-center flex-wrap gap-2'>
-                        <button className='border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white'><span className="pl-2 pr-2">Sofa and Chair</span></button>
-                        <button className='border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white'><span className="pl-2 pr-2">Full Interior</span></button>
-                        <button className='border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white'><span className="pl-2 pr-2">Lamp and Vase</span></button>
-                        <button className='border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white'><span className="pl-2 pr-2">Table</span></button>
-                        <button className='border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white'><span className="pl-2 pr-2">Wood Design</span></button>
+                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${category == 'Sofa' ? "bg-black text-white" : ''}  `} onClick={()=> {setCategory('Sofa')}}><span className="pl-2 pr-2">Sofa and Chair</span></button>
+
+                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${category == 'Interior' ? "bg-black text-white" : ''}  `} onClick={() => {setCategory('Interior')}}><span className="pl-2 pr-2">Full Interior</span></button>
+
+                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${category == 'Lamp' ? "bg-black text-white" : ''}  `} onClick={() => {setCategory('Lamp')}}><span className="pl-2 pr-2" >Lamp and Vase</span></button>
+                      
+
+                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${category == 'Table' ? "bg-black text-white" : ''}  `} onClick={() => {setCategory('Table')}}><span className="pl-2 pr-2">Tables</span></button>
+
+                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${category == 'Chair' ? "bg-black text-white" : ''}  `} onClick={() => {setCategory('Chair')}}><span className="pl-2 pr-2">Chairs</span></button>
                     </div>
                 </div>
 
                 <div className='w-full md:w-auto py-2  flex justify-between items-center '>
                     <div className='w-full '>
-                        <h2 className='font-medium text-base block mb-1   '>Price Range</h2>
+                        <h2 className='font-medium text-base block mb-1'>Price Range</h2>
                         <div className='flex flex-wrap '>
                             <select className="border py-[7px] rounded-lg px-[8px] me-2 ">
                             <option className="pl-1 pr-1" value="one">Popular</option>

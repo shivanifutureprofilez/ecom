@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Api } from "../Api/Api";
 import { MyContext } from "../context/UserContext";
 import toast from "react-hot-toast";
+import { CgProfile } from "react-icons/cg";
+
 
 function Navbar({ children }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -85,11 +87,16 @@ function Navbar({ children }) {
 
               {user ?
                 <>
-                  <div className="relative space-x-4">
+                  <div className="relative  flex  items-center space-x-4">
                     {/* <Link to="/cart">
                   <FiShoppingCart className="text-xl cursor-pointer hover:text-yellow-600" />
                 </Link> */}
-                    <Link to="/myprofile" className="  font-semibold cursor-pointer hover:text-yellow-600 capitalize text-blue-500">Hi, {user?.name}</Link>
+
+                    <div className="flex items-center gap-2">
+                        <CgProfile size={28} className="ml-9"/>
+                        <Link to="/myprofile" className="  font-semibold cursor-pointer hover:text-yellow-600 capitalize text-black">Hi, {user?.name}</Link>
+                    </div>
+                   
                     <button onClick={logout} className="text-gray-700 font-semibold cursor-pointer hover:text-yellow-600">Logout</button>
                   </div>
                 </>
