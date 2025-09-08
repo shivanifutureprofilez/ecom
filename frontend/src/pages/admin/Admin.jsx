@@ -1,31 +1,34 @@
-import React, { use, useContext, useEffect } from 'react'
-import Navbar from '../../Components/navbar';
-import { Link, useNavigate } from 'react-router-dom';
-import { MdDashboard, MdVerifiedUser } from 'react-icons/md';
-import Banner from '../Shop/Banner';
-import ProductForm from './ProductForm';
-import Footer from '../../Components/Footer';
+import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AdminSidebar from './AdminSidebar';
 import { MyContext } from '../../context/UserContext';
 
-function Admin() {
+function Admin({ children }) {
+  const { user } = useContext(MyContext);
+  const navigate = useNavigate();
 
-    const {user} = useContext(MyContext);
+  //   useEffect(() => {
+  //     if (user?.isAdmin !== 1) {
+  //       navigate("/");
+  //     }
+  //   }, [user, navigate]);
 
-    const navigate = useNavigate()
-    useEffect(()=>{ 
-         if(user?.isAdmin !== 1) { 
-            navigate("/")
-         }
-    },[]);
+  return (
+    <div className="max-w-[1420px] mx-auto px-4 py-6">
+      <div className="flex flex-wrap md:flex-nowrap gap-6">
+        {/* Sidebar */}
+        <div className="w-full md:w-1/4 bg-white ">
+          <AdminSidebar />
+        </div>
+        {/* Main content */}
+        <div className="w-full md:w-3/4 bg-white ">
+          {children}
+        </div>
 
-    return (
-        <>
-        <Navbar/>
-        <Banner title={'Admin'}/>
-        <ProductForm/>
-        <Footer/>
-        </>
-    )
+      </div>
+    </div>
+
+  );
 }
 
 export default Admin;

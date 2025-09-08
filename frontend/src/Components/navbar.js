@@ -73,7 +73,7 @@ function Navbar({ children }) {
                 </li>
               ))}
                 {user?.isAdmin == 1 ? <li  >
-                  <Link to={'/admin'} className="hover:text-yellow-600">
+                  <Link to={'/admin/product-add'} className="hover:text-yellow-600">
                     Add Product
                   </Link>
                 </li> : ''}

@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 
-function Filter({setCategory, category}) {
+function Filter({setCategory, category, select, setSelect}) {
+
+    const handleChange = (e) => {
+        setSelect(e.target.value);
+        //console.log("Selected Value : ",e.target.value)
+    };
     return (
         <div className='container mt-12 mx-auto'>
         <div className='container mx-auto  pb-8 md:pb-[50px]'>
@@ -25,18 +30,17 @@ function Filter({setCategory, category}) {
                 <div className='w-full md:w-auto py-2  flex justify-between items-center '>
                     <div className='w-full '>
                         <h2 className='font-medium text-base block mb-1'>Price Range</h2>
-                        <div className='flex flex-wrap '>
-                            <select className="border py-[7px] rounded-lg px-[8px] me-2 ">
-                            <option className="pl-1 pr-1" value="one">Popular</option>
-                            <option className="pl-1 pr-1" value="one">Low to High</option>
-                            <option className="pl-1 pr-1" value="one">High to Low</option>
-                            <option className="pl-1 pr-1" value="one">High to Low</option>
-                        </select>
+                        <div className='flex flex-wrap'>
+                            <select className="border py-[7px] rounded-lg px-[8px] me-2" value={select} onChange={handleChange}>
+                                <option className="pl-1 pr-1" value="all">Popular</option>
+                                <option className="pl-1 pr-1" value="low">Low to High</option>
+                                <option className="pl-1 pr-1" value="high">High to Low</option>
+                            </select>
                         </div>
                     </div>
                     <div className='md:pl-5    '>
                         <h2 className='font-medium text-base block mb-2  '>Choose Brand</h2>
-                        <select className="border py-[7px] rounded-lg px-[8px] me-2 ">
+                        <select className="border py-[7px] rounded-lg px-[8px] me-2">
                             <option className="pl-1 pr-1" value="one">Navana Furniture</option>
                             <option className="pl-2 pr-2" value="two">RFL Furniture </option>
                             <option className="pl-2 pr-2" value="three">Gazi Furniture</option>

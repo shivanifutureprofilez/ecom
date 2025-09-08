@@ -35,6 +35,7 @@ function ProductItem({product}) {
                 <FaStar className="text-yellow-500" />
                 <FaStar className="text-gray-200" />
             </div>
+            {product.deletedAt ? " DELETED" : ""}
         </div>
   </> : ""}
   </>

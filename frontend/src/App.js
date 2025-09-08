@@ -14,6 +14,8 @@ import { Toaster } from 'react-hot-toast';
 import UserProvider from './context/UserContext';
 import Profile from './pages/my-profile/Profile';
 import Admin from './pages/admin/Admin';
+import Add from './pages/admin/Product/Add';
+import List from './pages/admin/Product/List';
 
 
 function App() {
@@ -21,6 +23,10 @@ function App() {
     <div className="App">
       <UserProvider>
         <Router>
+          <Toaster
+            position="top-right"
+            reverseOrder={false}
+          />
           <ScrollToTop />
           <Routes>
             <Route path='/' element={<Home />} />
@@ -32,8 +38,12 @@ function App() {
             <Route path="/blog" element={<Blog />}></Route>
             <Route path="/blog/:label" element={<BlogDetails />}></Route>
             <Route path="/cart" element={<Cart />}></Route>
-            <Route path="/myprofile" element={<Profile/>}></Route>
-            <Route path='/admin' element={<Admin/>}></Route>
+            <Route path="/myprofile" element={<Profile />}></Route>
+
+            {/* Admin Management */}
+            <Route path='/admin' element={<Admin />}></Route>
+            <Route path='/admin/product-add' element={<Add />}></Route>
+            <Route path='/admin/product' element={<List />}></Route>
           </Routes>
         </Router>
       </UserProvider>

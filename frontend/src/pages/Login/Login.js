@@ -22,6 +22,7 @@ function Login() {
   }
 
   const navigate = useNavigate();
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -78,8 +79,11 @@ function Login() {
             <form className="mt-6 " onSubmit={handleSubmit}>
               <div>
                 <label className="font-medium text-base block mb-2">Email</label>
-                <input onChange={handleChange}
-                  type="email" value={regs.email} name='email'
+                <input 
+                  onChange={handleChange}
+                  type="email" 
+                  value={regs.email} 
+                  name='email'
                   placeholder="Enter Your Email Address"
                   className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                            focus:ring-blue-500 focus:border-blue-500 py-3 px-4"
