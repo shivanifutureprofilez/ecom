@@ -18,10 +18,10 @@ function AdminSidebar() {
             <div className='w-full'>
                 <div className=" text-gray-700 font-semibold space-y-6">
                     <Link to="/admin/product" className='leading-10 border-b text-black font-semibold text-[14px] cursor-pointer md:text-[18px] hover:text-yellow-700 active:underline '>
-                        Product
+                        All Products
                     </Link>
                     <p className='leading-10 border-b text-black font-semibold text-[14px] cursor-pointer md:text-[18px] hover:text-yellow-700 active:underline '>
-                        My Addresses
+                        Add Products
                     </p>
                     <p className='leading-10 border-b text-black font-semibold text-[14px] cursor-pointer md:text-[18px] hover:text-yellow-700 active:underline ' >
                         Edit Account

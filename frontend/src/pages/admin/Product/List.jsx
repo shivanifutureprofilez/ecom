@@ -7,14 +7,11 @@ export default function List() {
 
   return (
     <Admin>
-     
-        <div className='flex flex-wrap justify-between pt-6'>
+        <div className='flex flex-wrap justify-between pt-[124px]'>
           <h3 className='text-xl md:text-xl font-medium leading-none text-gray-800 '>Product List</h3>
           <Link to="/admin/product-add" className='bg-blue-300 p-2  rounded-lg text-[14px] font-medium mb-2'>Add Product</Link>
         </div>
-        
-        <Listing category={"all"} />
-        
+        <Listing isAdmin={1} category={"all"} />
     </Admin>
   )
 }

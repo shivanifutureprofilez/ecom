@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdminSidebar from './AdminSidebar';
 import { MyContext } from '../../context/UserContext';
+import Header from './Header';
 
 function Admin({ children }) {
   const { user } = useContext(MyContext);
@@ -17,11 +18,11 @@ function Admin({ children }) {
     <div className="max-w-[1420px] mx-auto px-4 py-6">
       <div className="flex flex-wrap md:flex-nowrap gap-6">
         {/* Sidebar */}
-        <div className="w-full md:w-1/4 bg-white ">
-          <AdminSidebar />
-        </div>
+        
+          <Header />
+        
         {/* Main content */}
-        <div className="w-full md:w-3/4 bg-white ">
+        <div className="container mx-auto">
           {children}
         </div>
 

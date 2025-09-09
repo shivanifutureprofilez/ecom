@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Api } from '../../Api/Api';
 import ProductItem from '../../Components/ProductItem';
 
-function Listing({ category, select }) {
+function Listing({ category, select, isAdmin }) {
   console.log("select", select)
   const [products, setProducts] = useState([]);
   const GetProducts = () => {
@@ -44,10 +44,11 @@ function Listing({ category, select }) {
   return (
     <div className="">
       <hr className="mb-8" />
+
       {products?.length ? <div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {products && products?.map((product) => {
-            return <ProductItem product={product} />
+            return <ProductItem  isAdmin={isAdmin} product={product} />
           })}
         </div>
       </div> :

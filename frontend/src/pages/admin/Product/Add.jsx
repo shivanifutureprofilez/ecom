@@ -52,8 +52,8 @@ function Add() {
     };
     return (
         <Admin>
-            <div className="container flex justify-center items-center mx-auto xl:max-w-[1440px]">
-                <div className="p-[20px] w-full lg:p-[30px] flex flex-wrap md:flex-nowrap ">
+            <div className="container  mx-auto ">
+                <div className=" w-full mt-[124px] flex flex-wrap md:flex-nowrap ">
                     <div className="w-full relative ">
                         <div className='flex'>
                             <MdOutlineNoteAdd className='text-5xl min-h-[55px] min-w-[55px] text-yellow-600 mb-2  pt-0 round-[10px] p-2' />
@@ -82,11 +82,11 @@ function Add() {
                                             value={items?.product_type}
                                             name='product_type'
                                         >
-                                            <option className="pl-1 pr-1" value="Interior">Interior</option>
-                                            <option className="pl-2 pr-2" value="Chair">Chair </option>
-                                            <option className="pl-2 pr-2" value="Table">Table</option>
-                                            <option className="pl-2 pr-2" value="Lamp">Lamp</option>
-                                            <option className="pl-2 pr-2" value="Sofa">Sofa</option>
+                                            <option className="pl-1 pr-1" value="interior">Interior</option>
+                                            <option className="pl-2 pr-2" value="chair">Chair </option>
+                                            <option className="pl-2 pr-2" value="table">Table</option>
+                                            <option className="pl-2 pr-2" value="lamp">Lamp</option>
+                                            <option className="pl-2 pr-2" value="sofa">Sofa</option>
                                         </select>
                                     </div>
                                     <div >
@@ -138,7 +138,6 @@ function Add() {
                                         value={items?.content}
                                         name='content'
                                         placeholder="Enter Product Description"
-                                        maxLength={10}
                                         className=" w-full h-28 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                                    focus:ring-blue-500 focus:border-blue-500 py-3 px-4"
                                     />

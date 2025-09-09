@@ -14,6 +14,9 @@ function Filter({setCategory, category, select, setSelect}) {
                 <div className='w-full md:w-auto py-2 '>
                     <h2 className='font-medium text-base block mb-2'>Choose Category</h2>
                     <div className='flex items-center flex-wrap gap-2'>
+                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${category == 'all' ? "bg-black text-white" : ''}  `} onClick={()=> {setCategory('all')}}><span className="pl-2 pr-2">All Products</span></button>
+                        
+                        
                         <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${category == 'Sofa' ? "bg-black text-white" : ''}  `} onClick={()=> {setCategory('Sofa')}}><span className="pl-2 pr-2">Sofa and Chair</span></button>
 
                         <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${category == 'Interior' ? "bg-black text-white" : ''}  `} onClick={() => {setCategory('Interior')}}><span className="pl-2 pr-2">Full Interior</span></button>
