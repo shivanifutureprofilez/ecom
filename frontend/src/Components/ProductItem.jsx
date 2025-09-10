@@ -26,10 +26,6 @@ function ProductItem({product, isAdmin}) {
               <CiHeart className="text-black rounded-full" size={25} />
               </div>
               <div className="bg-white p-2 rounded-full">
-              
-              <AddToCart product_id={product?._id} qty={1} />
-              </div>
-              <div className="bg-white p-2 rounded-full">
               <IoEyeOutline className="text-black rounded-full" size={25}/>
               </div>
             </div>
@@ -49,9 +45,12 @@ function ProductItem({product, isAdmin}) {
                   <FaStar className="text-yellow-500" />
                   <FaStar className="text-gray-200" />
               </div>
-        
-              {isAdmin === 1 && 
+
+              {isAdmin === 1 ? 
                     <button className="bg-blue-600 text-white text-center rounded-xl w-full p-2 mt-3">Edit</button>
+              : <>
+                <AddToCart product_id={product?._id} qty={1} />
+              </>
               }
           
           </div>

@@ -6,23 +6,38 @@ import { CiShoppingCart } from "react-icons/ci";
 export default function AddToCart ({product_id, qty}) { 
     
     const [loading, setLoading] = useState(false);
+    const [count, setCount] = useState();
+    const [added, setAdded] = useState(false)
     const addtocart = () => { 
         setLoading(true);
         const additem = Api.post("/cart/add-to-cart",{product_id, qty});
         additem.then((res)=>{ 
-            toast.success("Added to cart")
-            setLoading(false);
+            if(res.data.status){ 
+                toast.success(res.data.message)
+                setAdded(true)
+            } else { 
+                toast.error(res.data.message)
+            }
+            setTimeout(()=>{
+                setLoading(false);
+            },1000)
+            // if(product_id && qty===1){
+            //     qty++;
+            // }
         }).catch((err)=>{
-            toast.success("failed to add to cart")
+            toast.error("failed to add to cart")
             setLoading(false);
         })
     }
 
     return <>
+        <button className={`bg-black flex items-center text-center justify-center text-white rounded-full py-2 px-4 mt-2  w-full ${added ? "pointer-events-none" : ""}`} onClick={addtocart} >
 
-
-        <button className={`${loading ? "!opacity-[0.2]." : ""}`} onClick={addtocart} >
-            <CiShoppingCart className="text-black rounded-full" size={25}/>
+            {added ? "Added" : 
+                <>
+                    {loading ? " Adding..." : <> <CiShoppingCart className="text-white me-2 rounded-full" size={25}/> Add To Cart</>  }
+                </>    
+        }
             </button>
     </>
 }

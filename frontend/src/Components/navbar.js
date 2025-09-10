@@ -16,6 +16,7 @@ function Navbar({ children }) {
     { name: "Shop", href: "/shop" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "Contact", href: "/contact-us" },
+    { name: "Cart", href: "/cart"}
     //{ name: "Login", href: '/login' },
     //{ name: "Register", href: '/register' },
   ];
@@ -72,7 +73,7 @@ function Navbar({ children }) {
                   </Link>
                 </li>
               ))}
-                {user?.isAdmin == 1 ? <li  >
+                {user?.isAdmin == 1 ? <li>
                   <Link to={'/admin/product-add'} className="hover:text-yellow-600">
                     Add Product
                   </Link>
