@@ -4,7 +4,7 @@ import Banner from '../Shop/Banner';
 import Newsletter from '../Home/Newsletter';
 import Footer from '../../Components/Footer';
 import ProductList from './ProductList';
-import Total from './Total';
+
 
 function Cart() {
   return (
@@ -12,7 +12,7 @@ function Cart() {
         <Navbar/>
         <Banner title={"Cart"}/>
         
-        <ProductList/>
+        <ProductList cart={true} />
         <Newsletter bg={"bg-[#f5f5f5]"}/>
         <Footer/>
     </div>

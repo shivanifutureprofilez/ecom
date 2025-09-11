@@ -2,174 +2,249 @@ import React, { useEffect, useState } from 'react'
 import { Api } from '../../Api/Api';
 import toast from 'react-hot-toast';
 import { LiaWindowClose } from "react-icons/lia";
+import { useNavigate } from 'react-router-dom';
 
-function ProductList() {
-    const [products,setProducts]=useState([]);
-    const getProducts = () =>{
+function ProductList({cart}) {
+    
+    const navigate = useNavigate();
+    const [products, setProducts] = useState([]);
+
+    function getSubtotal (p){ 
+        const st = p.reduce((acc, item) => {
+            return acc + (item?.product?.price * item?.quantity);
+        }, 0);
+        setsubTotal(st);
+    }
+    
+    const [subTotal,setsubTotal] = useState(0);
+
+    const [shipping, setShipping] = useState(0);
+    const vat = 5;
+
+    const [total,setTotal] = useState(subTotal + vat + shipping);
+
+    useEffect(()=>{
+        setTotal(subTotal + vat + shipping)
+    },[subTotal, shipping]);
+
+    const getProducts = () => {
         Api.get('/cart/all_carts_items')
-            .then((res) =>{
-                console.log("res" ,res)
-                if(res.data.status){
+            .then((res) => {
+                console.log("res", res)
+                if (res.data.status) {
                     setProducts(res.data.lists);
-                } else{
+                    getSubtotal(res.data.lists || [])
+                } else {
                     setProducts([]);
                 }
-            }).catch((error)=>{
+            }).catch((error) => {
                 toast.error('No Products Found. Try Again Later');
             });
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getProducts();
-    },[])
+    }, [])
 
-    
-    const CARTITEM = ({item, index}) => { 
-        
+
+    const CARTITEM = ({ item, index }) => {
+
         const [qty, setQty] = useState(item?.quantity || 1);
-        const value=1;
-        const UpdateCart = (product_id, qty) => {
-            const data = Api.post('/cart/updateCart', {product_id, qty});
-            data.then((res)=>{
-                if(res.data.status){
+        const value = 1;
+        const UpdateCart = (product_id, qty, price) => {
+            const data = Api.post('/cart/updateCart', { product_id, qty, price });
+            data.then((res) => {
+                if (res.data.status) {
                     toast.success(res.data.message)
-                } else { 
+                } else {
                     toast.error(res.data.message)
                 }
             })
+
         }
-        const deleteProduct = () =>{
-            const data = Api.post('/cart/deleted_cart_items', {id:item._id});
-            data.then((res)=>{
-                if(res.data.status){
+        const deleteProduct = () => {
+            const data = Api.post('/cart/deleted_cart_items', { id: item._id });
+            data.then((res) => {
+                if (res.data.status) {
                     toast.success(res.data.message)
                     getProducts()
                 }
-                else{
+                else {
                     toast.error(res.data.message)
                 }
             })
-        } 
-        const increseQty = () => { 
-            UpdateCart(item?.product?._id, qty+1);
-            setQty(qty+1);
         }
-        const decreseQty = () => { 
-            if(qty>1){
-                UpdateCart(item?.product?._id, qty-1);
-                setQty(qty-1);
+        const increseQty = () => {
+            UpdateCart(item?.product?._id, qty + 1);
+            setQty(qty + 1);
+            item.quantity = qty + 1;
+            getSubtotal(products)
+            console.log("i p", products)
+
+        }
+        const decreseQty = () => {
+            if (qty > 1) {
+                UpdateCart(item?.product?._id, qty - 1);
+                setQty(qty - 1);
+                item.quantity = qty - 1;
+                 getSubtotal(products)
             }
+
         }
 
         return <>
             <tr className=" border-t  hover:bg-gray-100 align-center" key={index}>
                 <td className="pl-4 md:pl-6 lg:pl-10 pr-3 py-4 text-[20px] justify-center font-medium text-[#46494D]">
                     <div className='flex flex-wrap'>
-                    <img className='h-[70px] w-[80px]' src={item?.product?.image}/>
-                    <div className='pt-4 pl-2'>
-                    {item?.product?.name}
-                    </div>
+                        <img className='h-[70px] w-[80px]' src={item?.product?.image} />
+                        <div className='pt-4 pl-2'>
+                            {item?.product?.name}
+                        </div>
                     </div>
                 </td>
                 <td className="px-3 py-4 text-[15px] font-medium text-[#46494D] ">
-                    ${item?.product?.price}
+                    &#8377;{item?.product?.price}*{qty}
                 </td>
-                <td className="px-3 py-4 text-[15px]  font-medium text-[#46494D] ">
+                {cart ? <td className="px-3 py-4 text-[15px]  font-medium text-[#46494D] ">
 
                     <div className='flex items-center'>
                         <button onClick={decreseQty} className=' min-w-[40px] min-h-[40px] bg-gray-300 text-lg text-black px-2 py-1 rounded-[4px]'>-</button>
                         <p className='min-w-[40px] text-center'> {qty}</p>
-                        <button  onClick={increseQty} className=' min-w-[40px] min-h-[40px] bg-gray-300 text-lg text-black px-2 py-1 rounded-[4px]'>+</button>
+                        <button onClick={increseQty} className=' min-w-[40px] min-h-[40px] bg-gray-300 text-lg text-black px-2 py-1 rounded-[4px]'>+</button>
                     </div>
-                    {/* /{products?.orderDate} */}
-                   
-                </td>
-                <td className="px-3 py-4 text-[15px] font-medium text-[#46494D] ">
-                    {item?.product?.price * qty }
-                </td>
+
+                </td> : ''}
+                {/* <td className="px-3 py-4 text-[15px] font-medium text-[#46494D] ">
+                    &#8377;{item?.product?.price * qty}
+                </td> */}
                 <td className="px-3 py-4 text-[15px] pl-8 font-medium text-[#46494D] ">
-                    <button onClick={deleteProduct}><LiaWindowClose size={24} className='align-center'/></button>
+                    <button onClick={deleteProduct}><LiaWindowClose size={24} className='align-center' /></button>
                 </td>
 
-                
+
             </tr>
         </>
     }
 
 
-  return (
-    <div className='container mx-auto '>
-        <div className='flex flex-wrap'>
-            <div className="flex-1 pt-[60px] overflow-x-auto">
-                <table className=" w-full ">
-                    <thead>
-                        <tr>
-                            <td className="pl-4 md:pl-6 lg:pl-10  pr-3 py-3 lg:py-3.5 text-[20px] font-medium text-black whitespace-nowrap  text-left uppercase ">
-                                Product Info
-                            </td>
-                            <td className="px-3 py-3 lg:py-3.5 text-[20px] font-medium text-black whitespace-nowrap text-left uppercase ">
-                                Price
-                            </td>
-                            <td className="px-3 py-3 lg:py-3.5 text-[20px] font-medium text-black whitespace-nowrap text-left uppercase ">
-                                Quantity
-                            </td>
-                            <td className="px-3 py-3 lg:py-3.5 text-[20px] font-medium text-black whitespace-nowrap text-left uppercase ">
-                                Total
-                            </td>
-                              <td className="px-3 py-3 lg:py-3.5 text-[20px] font-medium text-black whitespace-nowrap text-left uppercase ">
-                                Remove
-                            </td>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products?.length === 0 ? (
+    return (
+        <div className='container px-4 pt-4 md:pt-[20px]'>
+            <div className='flex xl:flex-row flex-col gap-[30px] lg:gap-[30px] xl:gap-[70px] '>
+                <div className={`w-full ${cart ? 'md:w-2/3' : '' }  p-3 overflow-x-auto`}>
+                    <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                        <thead>
                             <tr>
-                                <td colSpan="8">
-                                    <div className="flex items-center justify-center h-20">
-                                        <p className="text-[15px] font-medium text-[#46494D] ">
-                                            No Data Found !!
-                                        </p>
-                                    </div>
+                                <td className="pl-4 md:pl-6 lg:pl-10  pr-3 py-3 lg:py-3.5 text-[20px] font-medium text-black whitespace-nowrap  text-left uppercase ">
+                                    Product Info
                                 </td>
+                                <td className="px-3 py-3 lg:py-3.5 text-[20px] font-medium text-black whitespace-nowrap text-left uppercase ">
+                                    Price
+                                </td>
+                                {cart ? <td className="px-3 py-3 lg:py-3.5 text-[20px] font-medium text-black whitespace-nowrap text-left uppercase ">
+                                    Quantity
+                                </td> : ''}
+                                
+                                <td className="px-3 py-3 lg:py-3.5 text-[20px] font-medium text-black whitespace-nowrap text-left uppercase ">
+                                    Remove
+                                </td>
+
                             </tr>
-                        ) : (
-                            products && products?.map((item, index) => (
-                                <CARTITEM item={item} index={index} />
-                            ))
-                        )}
-                    </tbody>
-                </table>
-            </div>
-            
-               
-           <div className=''>
-            <h2 className='px-3 pt-[75px] text-[20px] font-medium text-black whitespace-nowrap text-left uppercase'>Promo Code</h2>
-            <div className='flex flex-wrap gap-3 pt-5'>
-                <input type="text" placeholder="Coupon Code" className=' bg-gray-50 border border-gray-300 text-gray-900 text-sm  
-                           focus:ring-blue-500 focus:border-blue-500 py-3 px-4'></input>
-                <button className='bg-black text-white  font-medium p-3'>Apply</button>
-            </div>
-            <div className='bg-[#f8f8f9] rounded-lg mt-8'>
-                
-                    <div className="flex justify-between flex-wrap gap-3">
-                        <div><span className='text-[16px] font-medium text-black  text-left uppercase'>Sub Total:</span></div>
-                        <div><span className='text-[16px] font-medium text-black text-left uppercase'>$870</span></div>
+                        </thead>
+                        <tbody>
+                            {products?.length === 0 ? (
+                                <tr>
+                                    <td colSpan="8">
+                                        <div className="flex items-center justify-center h-20">
+                                            <p className="text-[15px] font-medium text-[#46494D] ">
+                                                No Data Found !!
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ) : (
+                                products && products?.map((item, index) => (
+                                    <CARTITEM item={item} index={index} />
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+                {cart ? <div className='w-full md:w-1/3 p-3'>
+
+                    <div className='bg-[#f8f8f9] rounded-xl border border-[#17243026] border-opacity-15 p-2'>
+
+                        <div className="flex justify-between flex-wrap gap-3 pt-3">
+                            <div><span className='text-[12px] md:text-[14px] font-medium text-black  text-left uppercase'>Sub Total:</span></div>
+                            <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;{subTotal}</span></div>
+                        </div>
+                        <div className="flex justify-between flex-wrap gap-3 pt-3">
+                            <div><span className='text-[12px] md:text-[14px] font-medium text-black  text-left uppercase'>VAT:</span></div>
+                            <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;5</span></div>
+                        </div>
+                        <div className='border-b border-[#17243026]  pt-4 pb-4 '></div>
+
+                        <div className="flex justify-between flex-wrap gap-3 pt-3">
+                            <div><input
+                                type="radio"
+                                name="shipping"
+                                value={0}
+                                onChange={(e) => setShipping(Number(e.target.value))} />
+                                <label className='text-[12px] md:text-[14px] font-medium text-black leading-normal  text-left uppercase'> Free Shipping </label></div>
+                            <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;0</span></div>
+                        </div>
+
+                        <div className="flex justify-between flex-wrap gap-3 pt-3">
+                            <div><input
+                                type="radio"
+                                name="shipping"
+                                value={40}
+                                onChange={(e) => setShipping(Number(e.target.value))} />
+                                <label className='text-[12px] md:text-[14px] font-medium text-black leading-normal  text-left uppercase'> Fast Shipping </label></div>
+                            <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;40</span></div>
+                        </div>
+
+                        <div className="flex justify-between flex-wrap gap-3 pt-3">
+                            <div><input
+                                type="radio"
+                                name="shipping"
+                                value={20}
+                                onChange={(e) => setShipping(Number(e.target.value))} />
+                                <label className='text-[12px] md:text-[14px] font-medium text-black leading-normal  text-left uppercase'> Local Pickup </label></div>
+                            <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;20</span></div>
+                        </div>
+
+                        <div className='border-b border-[#17243026]  pt-4 pb-4 '></div>
+
+                        <div className="flex justify-between flex-wrap gap-3 pt-3">
+                            <div><span className='text-[12px] md:text-[14px]  text-black  font-semibold text-left uppercase'>Total:</span></div>
+                            <div><span className='text-[12px] md:text-[14px] font-semibold text-black text-left uppercase'>&#8377;{total}</span></div>
+                        </div>
+
+
                     </div>
-                    <div className="flex justify-between flex-wrap gap-3">
-                        <div><span className='text-[16px] font-medium text-black  text-left uppercase'>Coupon Discount:</span></div>
-                        <div><span className='text-[16px] font-medium text-black  text-left uppercase'>$20</span></div>
+                    <div className="flex justify-between gap-3 pt-6">
+                        <button
+                            onClick={() => navigate('/shop')}
+                            className="border border-black text-black bg-white hover:bg-black hover:text-white font-medium p-3"
+                        >
+                            Continue Shopping
+                        </button>
+
+                        <button
+                            onClick={() => navigate('/checkout')}
+                            type="submit"
+                            className="bg-yellow-700 text-white border border-yellow-700 hover:bg-white hover:text-yellow-700 font-medium p-3"
+                        >
+                            Checkout
+                        </button>
                     </div>
-                    <div className="flex justify-between flex-wrap gap-3">
-                        <div><span className='text-[16px] font-medium text-black  text-left uppercase'>VAT:</span></div>
-                        <div><span className='text-[16px] font-medium text-black text-left uppercase'>$5</span></div>
-                    </div>             
+
+
+                </div> : ''}
+
             </div>
-            
         </div>
-    </div>
-    </div>
-);
+    );
 }
 
 export default ProductList;

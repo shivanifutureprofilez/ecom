@@ -16,6 +16,7 @@ import Profile from './pages/my-profile/Profile';
 import Admin from './pages/admin/Admin';
 import Add from './pages/admin/Product/Add';
 import List from './pages/admin/Product/List';
+import Checkout from './pages/checkout/Checkout';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
             <Route path='/admin' element={<Admin />}></Route>
             <Route path='/admin/product-add' element={<Add />}></Route>
             <Route path='/admin/product' element={<List />}></Route>
+            <Route path='/checkout' element={<Checkout />}></Route>
           </Routes>
         </Router>
       </UserProvider>

@@ -10,6 +10,7 @@ function Register() {
   const [regs, setRegs] = useState({
     name: "",
     email: "",
+    phone: "",
     password: "",
     confirmpassword: "",
   })
@@ -62,6 +63,7 @@ function Register() {
       setRegs({
         name: "",
         email: "",
+        phone: "",
         password: ""
       })
     }
@@ -109,6 +111,20 @@ function Register() {
                   value={regs.email}
                   onChange={handleChange}
                   placeholder="Enter Your Email Address"
+                  className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                           focus:ring-blue-500 focus:border-blue-500 py-3 px-4"
+                  onFocus={handleFocusFalse}
+                />
+              </div>
+              <div className='mt-2'>
+                <label className="font-medium text-base block mb-2">Phone no</label>
+                <input
+                  type="number"
+                  name="phone"
+                  required
+                  value={regs.phone}
+                  onChange={handleChange}
+                  placeholder="Enter Your Phone Number"
                   className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                            focus:ring-blue-500 focus:border-blue-500 py-3 px-4"
                   onFocus={handleFocusFalse}

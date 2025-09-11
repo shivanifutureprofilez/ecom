@@ -20,7 +20,7 @@ function ProductItem({product, isAdmin}) {
 
           <div className=" relative overflow-hidden  mb-4 ">
   <button className="absolute top-2 left-2 bg-black text-white rounded-full px-3 py-1 z-10 text-gray-400 capitalize">{product.product_type} ({product.brand_name})</button>
-            <img src={product.image} alt={product.name} className="  hover:scale-110 duration-300 w-full max-h-[200px] min-h-[200px] object-cover  shadow" />
+            <img src={product.image || 'https://th.bing.com/th/id/R.7f54ccabef0d3e994f8a18d37a3fc1e2?rik=UHlSkiyHTneN5A&riu=http%3a%2f%2fseotoolstack.com%2fuploads%2f51%2f640x360.png&ehk=KAtrosfKpgcGndDMVkvtcRahX4drXNhBwWvf6iMpRK8%3d&risl=&pid=ImgRaw&r=0'} alt={product.name} className="  hover:scale-110 duration-300 w-full max-h-[200px] min-h-[200px] object-cover  shadow" />
             <div className="  productactions  absolute top-[65px] right-5 flex flex-col gap-2 ">
               <div className="bg-white p-2 rounded-full">
               <CiHeart className="text-black rounded-full" size={25} />
