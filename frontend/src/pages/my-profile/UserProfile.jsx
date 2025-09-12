@@ -1,10 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaPhoneVolume } from "react-icons/fa6";
 import { IoMailOutline } from "react-icons/io5";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
+import { Api } from '../../Api/Api';
 
 export default function UserProfile({ user }) {
+    const [address, setAddress] = useState([]);
+    const GetAddress = () => {
+        Api.get('/checkout/address')
+            .then((res) => {
+                //console.log("userAddress : ", res);
+                if (res.data.status) {
+                    setAddress(res.data.address);
+                    console.log("address ", address);
+                }
+                else {
+                    setAddress([]);
+                }
+            })
+            .catch((err) => {
+                console.log("error ", err);
+            })
+    }
+    useEffect(() => {
+        GetAddress();
+    }, []);
     return (
         <div className=' container mx-auto bg-[#F8F8F9]  p-10 mb-14'>
             <div className='bg-[#F8F8F9] mx-auto'>
@@ -18,7 +39,7 @@ export default function UserProfile({ user }) {
                <div class="mt-5 sm:mt-8 md:mt-10 grid gap-4 sm:gap-6">
                 <div class="flex items-center gap-2 hover:cursor-pointer">
                 <MdOutlinePhoneInTalk size={24} className='text-yellow-700'/>
-               <span class="leading-none font-medium text-base sm:text-lg">+111 - (1234 5678 99)</span>
+               <span class="leading-none font-medium text-base sm:text-lg">{user?.phone}</span>
                </div>
                <div class="flex items-center gap-2 hover:cursor-pointer" >
                <IoMailOutline size={24} className='text-yellow-700'/>
@@ -26,7 +47,8 @@ export default function UserProfile({ user }) {
                </div>
                <div class="flex items-center gap-2 hover:cursor-pointer" >
                <IoLocationOutline size={24} className='text-yellow-700'/>
-               <span class="leading-none font-medium text-base sm:text-lg">23/ A Lake Side , New Arizona , USA</span></div></div>
+               <span class="leading-none font-medium text-base sm:text-lg">{address[0]?.town}</span>
+               </div></div> 
             </div>
         </div>
     )

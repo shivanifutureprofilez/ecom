@@ -4,28 +4,28 @@ import toast from 'react-hot-toast';
 import { LiaWindowClose } from "react-icons/lia";
 import { useNavigate } from 'react-router-dom';
 
-function ProductList({cart}) {
-    
+function ProductList({ cart, checkout }) {
+
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
 
-    function getSubtotal (p){ 
+    function getSubtotal(p) {
         const st = p.reduce((acc, item) => {
             return acc + (item?.product?.price * item?.quantity);
         }, 0);
         setsubTotal(st);
     }
-    
-    const [subTotal,setsubTotal] = useState(0);
+
+    const [subTotal, setsubTotal] = useState(0);
 
     const [shipping, setShipping] = useState(0);
     const vat = 5;
 
-    const [total,setTotal] = useState(subTotal + vat + shipping);
+    const [total, setTotal] = useState(subTotal + vat + shipping);
 
-    useEffect(()=>{
+    useEffect(() => {
         setTotal(subTotal + vat + shipping)
-    },[subTotal, shipping]);
+    }, [subTotal, shipping]);
 
     const getProducts = () => {
         Api.get('/cart/all_carts_items')
@@ -87,7 +87,7 @@ function ProductList({cart}) {
                 UpdateCart(item?.product?._id, qty - 1);
                 setQty(qty - 1);
                 item.quantity = qty - 1;
-                 getSubtotal(products)
+                getSubtotal(products)
             }
 
         }
@@ -117,9 +117,9 @@ function ProductList({cart}) {
                 {/* <td className="px-3 py-4 text-[15px] font-medium text-[#46494D] ">
                     &#8377;{item?.product?.price * qty}
                 </td> */}
-                <td className="px-3 py-4 text-[15px] pl-8 font-medium text-[#46494D] ">
+                {cart ? <td className="px-3 py-4 text-[15px] pl-8 font-medium text-[#46494D] ">
                     <button onClick={deleteProduct}><LiaWindowClose size={24} className='align-center' /></button>
-                </td>
+                </td> : ''}
 
 
             </tr>
@@ -129,8 +129,8 @@ function ProductList({cart}) {
 
     return (
         <div className='container px-4 pt-4 md:pt-[20px]'>
-            <div className='flex xl:flex-row flex-col gap-[30px] lg:gap-[30px] xl:gap-[70px] '>
-                <div className={`w-full ${cart ? 'md:w-2/3' : '' }  p-3 overflow-x-auto`}>
+            {products && products.length > 0 ? <div className='flex xl:flex-row flex-col gap-[30px] lg:gap-[30px] xl:gap-[70px] '>
+                <div className={`w-full ${cart ? 'md:w-2/3' : ''}  p-3 overflow-x-auto`}>
                     <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
                         <thead>
                             <tr>
@@ -143,10 +143,10 @@ function ProductList({cart}) {
                                 {cart ? <td className="px-3 py-3 lg:py-3.5 text-[20px] font-medium text-black whitespace-nowrap text-left uppercase ">
                                     Quantity
                                 </td> : ''}
-                                
-                                <td className="px-3 py-3 lg:py-3.5 text-[20px] font-medium text-black whitespace-nowrap text-left uppercase ">
+
+                                {cart ? <td className="px-3 py-3 lg:py-3.5 text-[20px] font-medium text-black whitespace-nowrap text-left uppercase ">
                                     Remove
-                                </td>
+                                </td> : ''}
 
                             </tr>
                         </thead>
@@ -168,61 +168,80 @@ function ProductList({cart}) {
                             )}
                         </tbody>
                     </table>
+                    {checkout && (
+                        <div className="flex gap-6 items-center p-3">
+                            <span className="text-[14px] md:text-[18px] text-black font-semibold uppercase">
+                                Total:
+                            </span>
+                            <span className="text-[14px] md:text-[18px] font-semibold text-black uppercase">
+                                &#8377;{total}
+                            </span>
+                        </div>
+                    )}
+
                 </div>
-                {cart ? <div className='w-full md:w-1/3 p-3'>
+                <div className={`${cart ? 'w-full md:w-1/3 p-3' : ''}`}>
 
-                    <div className='bg-[#f8f8f9] rounded-xl border border-[#17243026] border-opacity-15 p-2'>
+                    <div
+                        className={`${cart ? 'bg-[#f8f8f9] rounded-xl border  border-[#17243026] border-opacity-15 p-3' : 'bg-white'}`}
+                    >
 
-                        <div className="flex justify-between flex-wrap gap-3 pt-3">
-                            <div><span className='text-[12px] md:text-[14px] font-medium text-black  text-left uppercase'>Sub Total:</span></div>
-                            <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;{subTotal}</span></div>
-                        </div>
-                        <div className="flex justify-between flex-wrap gap-3 pt-3">
-                            <div><span className='text-[12px] md:text-[14px] font-medium text-black  text-left uppercase'>VAT:</span></div>
-                            <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;5</span></div>
-                        </div>
-                        <div className='border-b border-[#17243026]  pt-4 pb-4 '></div>
+                        {cart ?
+                            <div>
+                                <div className="flex justify-between flex-wrap gap-3 pt-3">
+                                    <div><span className='text-[12px] md:text-[14px] font-medium text-black  text-left uppercase'>Sub Total:</span></div>
+                                    <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;{subTotal}</span></div>
+                                </div>
+                                <div className="flex justify-between flex-wrap gap-3 pt-3">
+                                    <div><span className='text-[12px] md:text-[14px] font-medium text-black  text-left uppercase'>VAT:</span></div>
+                                    <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;5</span></div>
+                                </div>
+                                <div className='border-b border-[#17243026]  pt-4 pb-4 '></div>
 
-                        <div className="flex justify-between flex-wrap gap-3 pt-3">
-                            <div><input
-                                type="radio"
-                                name="shipping"
-                                value={0}
-                                onChange={(e) => setShipping(Number(e.target.value))} />
-                                <label className='text-[12px] md:text-[14px] font-medium text-black leading-normal  text-left uppercase'> Free Shipping </label></div>
-                            <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;0</span></div>
-                        </div>
+                                <div className="flex justify-between flex-wrap gap-3 pt-3">
+                                    <div><input
+                                        type="radio"
+                                        name="shipping"
+                                        value={0}
+                                        onChange={(e) => setShipping(Number(e.target.value))} />
+                                        <label className='text-[12px] md:text-[14px] font-medium text-black leading-normal  text-left uppercase'> Free Shipping </label></div>
+                                    <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;0</span></div>
+                                </div>
 
-                        <div className="flex justify-between flex-wrap gap-3 pt-3">
-                            <div><input
-                                type="radio"
-                                name="shipping"
-                                value={40}
-                                onChange={(e) => setShipping(Number(e.target.value))} />
-                                <label className='text-[12px] md:text-[14px] font-medium text-black leading-normal  text-left uppercase'> Fast Shipping </label></div>
-                            <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;40</span></div>
-                        </div>
+                                <div className="flex justify-between flex-wrap gap-3 pt-3">
+                                    <div><input
+                                        type="radio"
+                                        name="shipping"
+                                        value={40}
+                                        onChange={(e) => setShipping(Number(e.target.value))} />
+                                        <label className='text-[12px] md:text-[14px] font-medium text-black leading-normal  text-left uppercase'> Fast Shipping </label></div>
+                                    <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;40</span></div>
+                                </div>
 
-                        <div className="flex justify-between flex-wrap gap-3 pt-3">
-                            <div><input
-                                type="radio"
-                                name="shipping"
-                                value={20}
-                                onChange={(e) => setShipping(Number(e.target.value))} />
-                                <label className='text-[12px] md:text-[14px] font-medium text-black leading-normal  text-left uppercase'> Local Pickup </label></div>
-                            <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;20</span></div>
-                        </div>
+                                <div className="flex justify-between flex-wrap gap-3 pt-3">
+                                    <div><input
+                                        type="radio"
+                                        name="shipping"
+                                        value={20}
+                                        onChange={(e) => setShipping(Number(e.target.value))} />
+                                        <label className='text-[12px] md:text-[14px] font-medium text-black leading-normal  text-left uppercase'> Local Pickup </label></div>
+                                    <div><span className='text-[12px] md:text-[14px] font-medium text-black text-left uppercase'>&#8377;20</span></div>
+                                </div>
 
-                        <div className='border-b border-[#17243026]  pt-4 pb-4 '></div>
 
-                        <div className="flex justify-between flex-wrap gap-3 pt-3">
-                            <div><span className='text-[12px] md:text-[14px]  text-black  font-semibold text-left uppercase'>Total:</span></div>
-                            <div><span className='text-[12px] md:text-[14px] font-semibold text-black text-left uppercase'>&#8377;{total}</span></div>
-                        </div>
+                                <div className='border-b border-[#17243026]  pt-4 pb-4 '></div> </div> : ''}
+
+                        {!checkout && (
+
+                            <div className={`${cart ? 'flex justify-between items-center border-b border-[#17243026] pb-3 gap-3 pt-3' : 'mt-6'}`}>
+                                <span className='text-[12px] md:text-[14px]  text-black  font-semibold text-left uppercase'>Total:</span>
+                                <span className='text-[12px] md:text-[14px] font-semibold text-black text-left uppercase'>&#8377;{total}</span>
+                            </div>
+                        )}
 
 
                     </div>
-                    <div className="flex justify-between gap-3 pt-6">
+                    {cart ? <div className="flex justify-between gap-3 pt-6">
                         <button
                             onClick={() => navigate('/shop')}
                             className="border border-black text-black bg-white hover:bg-black hover:text-white font-medium p-3"
@@ -237,12 +256,16 @@ function ProductList({cart}) {
                         >
                             Checkout
                         </button>
-                    </div>
+                    </div> : ''}
 
 
-                </div> : ''}
+                </div>
 
-            </div>
+            </div> : 
+
+            <div className='min-h-[40vh] flex justify-center items-center py-20 text-2xl uppercase px-4 text-gray-400 text-center'>No Products in cart !!</div>
+            
+            }
         </div>
     );
 }

@@ -17,6 +17,7 @@ import Admin from './pages/admin/Admin';
 import Add from './pages/admin/Product/Add';
 import List from './pages/admin/Product/List';
 import Checkout from './pages/checkout/Checkout';
+import ThankYou from './Components/ThankYou';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
             <Route path='/admin/product-add' element={<Add />}></Route>
             <Route path='/admin/product' element={<List />}></Route>
             <Route path='/checkout' element={<Checkout />}></Route>
+            <Route path='/ThankYou' element={<ThankYou/>}></Route>
           </Routes>
         </Router>
       </UserProvider>
