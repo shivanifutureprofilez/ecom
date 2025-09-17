@@ -26,7 +26,7 @@ function Address() {
             .then((res) => {
                 //console.log("userAddress : ", res);
                 if (res.data.status) {
-                    setAddress(res.data.address);
+                    setAddress(res.data.alladdress);
                     console.log("address ", address);
                 }
                 else {
@@ -55,7 +55,7 @@ function Address() {
                             <div key={index}
                                 className='bg-[#f8f8f9] rounded-lg text-left px-3 py-3'>
                                 {/* <h4 className=' text-[15px] font-bold  uppercase text-[#46494D]'>{item?.address_type}</h4> */}
-                                <p className=' text-[15px] font-medium text-[#46494D]'>{item?.town}</p>
+                                <p className=' text-[15px] font-medium text-[#46494D] line-clamp-2'>{item?.address}</p>
                             </div>
                         ))
                     )}

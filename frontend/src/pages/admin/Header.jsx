@@ -20,7 +20,7 @@ function Header() {
             {/* Logo */}
             
               {/* <span className="block text-2xl font-bold text-gray-800"> */}
-              <img className="max-w-[200px] w-[200px]" src="https://furnixar.vercel.app/assets/logo-DXjmQiDB.svg" />
+              <img className="max-w-[200px] w-[200px]" src={'/logo.png'} />
               {/* </span> */}
               <div className='flex gap-4'>
                <button onClick={logout} className="text-gray-700 font-semibold cursor-pointer hover:text-yellow-600">Logout</button>

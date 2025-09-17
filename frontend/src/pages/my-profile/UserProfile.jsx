@@ -12,7 +12,7 @@ export default function UserProfile({ user }) {
             .then((res) => {
                 //console.log("userAddress : ", res);
                 if (res.data.status) {
-                    setAddress(res.data.address);
+                    setAddress(res.data.showaddress);
                     console.log("address ", address);
                 }
                 else {
@@ -47,7 +47,7 @@ export default function UserProfile({ user }) {
                </div>
                <div class="flex items-center gap-2 hover:cursor-pointer" >
                <IoLocationOutline size={24} className='text-yellow-700'/>
-               <span class="leading-none font-medium text-base sm:text-lg">{address[0]?.town}</span>
+               <span class="leading-none font-medium text-base sm:text-lg">{address?.address}</span>
                </div></div> 
             </div>
         </div>

@@ -12,7 +12,8 @@ function Cart() {
         <Navbar/>
         <Banner title={"Cart"}/>
         
-        <ProductList cart={true} />
+        <ProductList  cart={true} />
+        
         <Newsletter bg={"bg-[#f5f5f5]"}/>
         <Footer/>
     </div>

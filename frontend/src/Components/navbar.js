@@ -61,7 +61,7 @@ function Navbar({ children }) {
             {/* Logo */}
             <div className="flex items-center space-x-2">
               {/* <span className="block text-2xl font-bold text-gray-800"> */}
-              <img className="max-w-[200px] w-[200px]" src="https://furnixar.vercel.app/assets/logo-DXjmQiDB.svg" />
+              <img className="max-w-[200px] w-[200px]" src='/logo.png'/>
               {/* </span> */}
             </div>
 

@@ -3,8 +3,9 @@ import { Api } from '../../Api/Api';
 import toast from 'react-hot-toast';
 import { LiaWindowClose } from "react-icons/lia";
 import { useNavigate } from 'react-router-dom';
+import Image from "../../Components/Image";
 
-function ProductList({ cart, checkout }) {
+function ProductList({ cart, checkout, setCarts}) {
 
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
@@ -34,10 +35,12 @@ function ProductList({ cart, checkout }) {
                 if (res.data.status) {
                     setProducts(res.data.lists);
                     getSubtotal(res.data.lists || [])
+                    setCarts && setCarts(res.data.lists || [])
                 } else {
                     setProducts([]);
                 }
             }).catch((error) => {
+                console.log("error",error)
                 toast.error('No Products Found. Try Again Later');
             });
     }
@@ -55,7 +58,7 @@ function ProductList({ cart, checkout }) {
             const data = Api.post('/cart/updateCart', { product_id, qty, price });
             data.then((res) => {
                 if (res.data.status) {
-                    toast.success(res.data.message)
+                    //toast.success(res.data.message)
                 } else {
                     toast.error(res.data.message)
                 }
@@ -96,7 +99,7 @@ function ProductList({ cart, checkout }) {
             <tr className=" border-t  hover:bg-gray-100 align-center" key={index}>
                 <td className="pl-4 md:pl-6 lg:pl-10 pr-3 py-4 text-[20px] justify-center font-medium text-[#46494D]">
                     <div className='flex flex-wrap'>
-                        <img className='h-[70px] w-[80px]' src={item?.product?.image} />
+                        <Image classes='h-[70px] w-[80px]' src={item?.product?.image} />
                         <div className='pt-4 pl-2'>
                             {item?.product?.name}
                         </div>
@@ -114,14 +117,9 @@ function ProductList({ cart, checkout }) {
                     </div>
 
                 </td> : ''}
-                {/* <td className="px-3 py-4 text-[15px] font-medium text-[#46494D] ">
-                    &#8377;{item?.product?.price * qty}
-                </td> */}
                 {cart ? <td className="px-3 py-4 text-[15px] pl-8 font-medium text-[#46494D] ">
                     <button onClick={deleteProduct}><LiaWindowClose size={24} className='align-center' /></button>
                 </td> : ''}
-
-
             </tr>
         </>
     }
