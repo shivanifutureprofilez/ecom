@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL =  "https://backend-ecom-1-1vlc.onrender.com/api";
+const API_URL =  "http://localhost:5000/api"
 
 function getToken() {
     if (typeof window !== 'undefined') {
