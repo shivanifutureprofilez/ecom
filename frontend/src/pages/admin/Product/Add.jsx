@@ -31,7 +31,6 @@ function Add() {
             }
             setLoading(true)
             const response = await Api.post('/product/add-product', items);
-            console.log("response", response)
             toast.success(response?.data?.message);
             navigate("/admin/product")
             setItems({

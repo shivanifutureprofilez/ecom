@@ -22,9 +22,6 @@ function CheckoutForm({ }) {
     quantity: 0
   })
 
-  console.log("billingData", billingData)
-  console.log("carts", carts)
-
   const emptyCart = (id) => {
     Api.post('/cart/emptyCart', { id })
       .then((res) => {
@@ -75,14 +72,10 @@ function CheckoutForm({ }) {
         !billingData.addressL1 === '' ||
         !billingData.paymentMode === ''
       ) {
-        console.log("billing Data", billingData);
         toast.error("All necessary fields are required.");
         return;
       }
-
-      console.log("billingData",billingData)
       const response = await Api.post('/checkout/add', {...billingData, products : productLists});
-      console.log("billingData 222",billingData)
       if (response?.data) {
         toast.success(response?.data?.message);
         setTimeout(() => {
@@ -114,11 +107,8 @@ function CheckoutForm({ }) {
     const GetAddress = () => {
         Api.get('/address/userAddress')
             .then((res) => {
-                console.log("userAddress : ", res);
                 if (res.data.status) {
-                   setBillingData({
-      addressL1: res.data.showaddress ||  "",
-    })
+                   setBillingData({  addressL1: res.data.showaddress ||  "", })
                 }
                 else {
                     setAddress([]);

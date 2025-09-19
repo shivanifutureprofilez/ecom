@@ -13,7 +13,6 @@ function Login() {
 
   const {setUser} = useContext(MyContext)
 
-  // console.log("user",user)
   const [loading, setLoading] = useState(false);
   const handleChange = (e) => {    //event object
     const name = e.target.name;
@@ -27,7 +26,6 @@ function Login() {
     e.preventDefault();
     try {
       if (regs.password === '' || regs.email === '') {
-        console.log("regs", regs)
         toast.error("All fields are required.");
         return false;
       }
@@ -51,7 +49,6 @@ function Login() {
         })
         setLoading(false);
       }).catch((err) => {
-        console.log("Hello from catch block", err);
         toast.error(err?.response?.data?.message);
         setLoading(false);
       })

@@ -3,14 +3,14 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import { CiShoppingCart } from "react-icons/ci";
 
-export default function AddToCart ({product_id, qty}) { 
+export default function AddToCart ({wishlist, product_id, qty}) { 
     
     const [loading, setLoading] = useState(false);
     const [count, setCount] = useState();
     const [added, setAdded] = useState(false)
     const addtocart = () => { 
         setLoading(true);
-        const additem = Api.post("/cart/add-to-cart",{product_id, qty});
+        const additem = Api.post("/cart/add-to-cart",{product_id, qty, wishlist: wishlist ? 1 : 0});
         additem.then((res)=>{ 
             if(res.data.status){ 
                 toast.success(res.data.message)

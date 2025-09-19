@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Api } from '../../Api/Api';
 import ProductItem from '../../Components/ProductItem';
 
-function Listing({ category, select, isAdmin }) {
-  console.log("select", select)
+function Listing({ wishlist, category, select, isAdmin }) {
   const [products, setProducts] = useState([]);
   const GetProducts = () => {
     Api.get('/product/get-product')
@@ -27,7 +26,6 @@ function Listing({ category, select, isAdmin }) {
             }
           }
           setProducts(productdata);
-          console.log("productdata", productdata);
         } else {
           setProducts([]);
         }
@@ -47,9 +45,10 @@ function Listing({ category, select, isAdmin }) {
 
       {products?.length ? <div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-          {products && products?.map((product) => {
-            return <ProductItem  isAdmin={isAdmin} product={product} />
-          })}
+          {products && products?.map((product) => (
+            <ProductItem  isAdmin={isAdmin} product={product}  GetProducts={GetProducts}/>
+          )
+          )}
         </div>
       </div> :
         <div className='w-full p-6 text-center bg-gray-100 text-lg'>No Result found !!</div>}

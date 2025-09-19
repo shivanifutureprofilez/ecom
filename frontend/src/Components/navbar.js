@@ -25,7 +25,6 @@ function Navbar({ children }) {
   const GetUser = () => {
     const fetch = Api.get('/myprofile');
     fetch.then((res) => {
-      console.log('res', res)
       if (res.data.status) {
         setUser(res.data.user)
       } else {

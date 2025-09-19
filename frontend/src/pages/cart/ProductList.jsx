@@ -31,7 +31,6 @@ function ProductList({ cart, checkout, setCarts}) {
     const getProducts = () => {
         Api.get('/cart/all_carts_items')
             .then((res) => {
-                console.log("res", res)
                 if (res.data.status) {
                     setProducts(res.data.lists);
                     getSubtotal(res.data.lists || [])
@@ -82,9 +81,8 @@ function ProductList({ cart, checkout, setCarts}) {
             setQty(qty + 1);
             item.quantity = qty + 1;
             getSubtotal(products)
-            console.log("i p", products)
-
         }
+
         const decreseQty = () => {
             if (qty > 1) {
                 UpdateCart(item?.product?._id, qty - 1);

@@ -10,10 +10,8 @@ export default function UserProfile({ user }) {
     const GetAddress = () => {
         Api.get('/checkout/address')
             .then((res) => {
-                //console.log("userAddress : ", res);
                 if (res.data.status) {
                     setAddress(res.data.showaddress);
-                    console.log("address ", address);
                 }
                 else {
                     setAddress([]);

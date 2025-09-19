@@ -35,7 +35,6 @@ function OrderHistory({ user }) {
             .then((res) => {
                 if (res.data.status) {
                     setHistory(res.data.history);
-                    console.log(res.data.history);
                 }
                 else {
                     setHistory([]);

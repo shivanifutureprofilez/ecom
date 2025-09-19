@@ -13,7 +13,6 @@ import { MyContext } from '../../context/UserContext'
 export default function Home() {
 
     const { user } = useContext(MyContext);
-    console.log("user", user)
     return (
         <div>
             {/* 

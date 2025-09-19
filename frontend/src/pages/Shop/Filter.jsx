@@ -4,7 +4,6 @@ function Filter({setCategory, category, select, setSelect}) {
 
     const handleChange = (e) => {
         setSelect(e.target.value);
-        //console.log("Selected Value : ",e.target.value)
     };
     return (
         <div className='container mt-12 mx-auto'>

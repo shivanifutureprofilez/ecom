@@ -24,10 +24,8 @@ function Address() {
     const GetAddress = () => {
         Api.get('/checkout/address')
             .then((res) => {
-                //console.log("userAddress : ", res);
                 if (res.data.status) {
                     setAddress(res.data.alladdress);
-                    console.log("address ", address);
                 }
                 else {
                     setAddress([]);
@@ -40,7 +38,6 @@ function Address() {
     useEffect(() => {
         GetAddress();
     }, []);
-    console.log("address" ,address)
     return (
         <div className='container mx-auto '>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-3 '>
