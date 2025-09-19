@@ -7,7 +7,6 @@ import { useContext, useState } from "react";
 import { MyContext } from "../context/UserContext";
 import AddToCart from "./AddToCart";
 import Image from "./Image";
-import defaultImage from '../Assets/defaultimage.jpg';
 import { Api } from "../Api/Api";
 import toast from "react-hot-toast";
 import { RxCross2 } from "react-icons/rx";
