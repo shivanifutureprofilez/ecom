@@ -14,7 +14,7 @@ function ThankYou() {
                     <h3 className='align-center font-semibold text-2xl   md:text-3xl text-center  sm:text-left '>Thank You So Much for Choosing Furnixar</h3>
                     <CiFaceSmile size={32} className=' text-green-500 pl-2'/>
                 </div>
-            </div>
+            </div> 
         </div>
     )
 }
