@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL =  "http://localhost:5000/api"
+const API_URL =  "https://backend-ecom-n1t3.onrender.com/api"
 
 function getToken() {
     if (typeof window !== 'undefined') {
