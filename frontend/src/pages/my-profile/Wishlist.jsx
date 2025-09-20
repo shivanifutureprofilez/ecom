@@ -31,10 +31,11 @@ function Wishlist({ user }) {
         <div className='grid grid-cols-3 gap-4'>
 
             {wishlistProducts?.map((item, index) => (
-                <ProductItem wishlistItem={wishlistProducts} product={item} wishlist={true}  wishlistPage={true} GetWistList={GetWistList}/>
+                <ProductItem key={index} wishlistItem={wishlistProducts} product={item} wishlist={true}  wishlistPage={true} GetWistList={GetWistList}/>
             ))}
         </div>
     )
+    
 }
 
 export default Wishlist;

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL =  "https://backend-ecom-n1t3.onrender.com/api"
+const API_URL_LIVE =  "https://backend-ecom-n1t3.onrender.com/api"
+const API_URL =  "http://localhost:5001/api"
 
 function getToken() {
     if (typeof window !== 'undefined') {
@@ -9,9 +10,11 @@ function getToken() {
     }
     return null;
 }
+console.log("window.location.host",window.location.host)
 
 let Api = axios.create({
-    baseURL: API_URL,
+    // baseURL: window.location.host == 'localhost:3000' ?  API_URL  : API_URL_LIVE,
+    baseURL: "http://localhost:5001/api",
     headers: {
         'Accept': 'application/json',
         'Access-Control-Allow-Origin': '*',

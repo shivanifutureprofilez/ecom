@@ -10,13 +10,14 @@ import Image from "./Image";
 import { Api } from "../Api/Api";
 import toast from "react-hot-toast";
 import { RxCross2 } from "react-icons/rx";
+import PriceFormat from './PriceFormat';
 
-function ProductItem({ wishlistItem, product, isAdmin, wishlist, GetWistList, GetProducts, wishlistPage }) {
+function ProductItem({ key, wishlistItem, product, isAdmin, wishlist, GetWistList, GetProducts, wishlistPage }) {
   console.log("product", product)
 
   const [loading, setLoading] = useState(false);
   const { setUser, user } = useContext(MyContext);
-  const [added, setAdded] = useState(false);
+  const [added, setAdded] = useState(product?.isAddedToCart || false);
   const [iswished, setiswished] = useState(product?.isWishlisted || false);
 
 
@@ -28,7 +29,7 @@ function ProductItem({ wishlistItem, product, isAdmin, wishlist, GetWistList, Ge
     additem.then((res) => {
       if (res.data.status) {
         // toast.success(res.data.message)
-        setAdded(true);
+        setAdded(!added);
         setiswished(!iswished)
         GetProducts();
       } else {
@@ -67,7 +68,7 @@ function ProductItem({ wishlistItem, product, isAdmin, wishlist, GetWistList, Ge
   return <>
     {product ?
       <>
-        <div className={` ${user?.isAdmin == 1 && product.deletedAt ? 'opacity-[0.8] border border-red-300 ' : 'bg-gray-100 border border-gray-200'} product  overflow-hidden' `} key={product.name}>
+        <div key={key} className={` ${user?.isAdmin == 1 && product.deletedAt ? 'opacity-[0.8] border border-red-300 ' : 'bg-gray-100 border border-gray-200'} product  overflow-hidden' `} key={product.name}>
           <div className=" relative overflow-hidden  mb-4 ">
             <button className="absolute top-2 left-2 bg-black rounded-full px-3 py-1 z-10 text-white capitalize">{product.product_type ||product.product.product_type } ({ product.brand_name || product.product.brand_name})</button>
             {/* <div className="hover:scale-110 duration-300  mb-3 w-[300px] h-[300px]  object-cover  shadow"> */}
@@ -96,9 +97,9 @@ function ProductItem({ wishlistItem, product, isAdmin, wishlist, GetWistList, Ge
 
           <div className="p-4">
             <div className="flex flex-wrap justify-between">
-              <p className="text-black text-lg  capitalize line-clamp-1">{product.name || product.product.name}</p>
+              <p className="text-black text-lg  capitalize line-clamp-1">{product.name || product.product.name} {product?.isAddedToCart ? "YES" : "NO"}</p>
             </div>
-            <h2 className="text-gray-800 text-lg   font-semibold">Price : ${product.price || product.product.price}</h2>
+            <h2 className="text-gray-800 text-lg   font-semibold">Price : <PriceFormat price={product.price || product.product.price} /></h2>
             <div className="stars flex gap-1 ">
               <FaStar className="text-yellow-500" />
               <FaStar className="text-yellow-500" />
@@ -109,7 +110,7 @@ function ProductItem({ wishlistItem, product, isAdmin, wishlist, GetWistList, Ge
             {isAdmin === 1 ?
               <button className="bg-blue-600 text-white text-center rounded-xl w-full p-2 mt-3">Edit</button>
               : <>
-                <AddToCart wishlist={wishlist} product_id={product?._id || product.product?._id} qty={1} />
+                {product.isAddedToCart ? "Added" : <AddToCart wishlist={wishlist} product={product} product_id={product?._id || product.product?._id} qty={1} />}
               </>
             }
           </div>
