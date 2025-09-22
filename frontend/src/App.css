@@ -31,3 +31,10 @@
 .product:hover .productactions { 
     opacity: 1; transition: 0.5s;
 }
+
+@media(max-width:767px){
+    /* .container { 
+        padding-left: 20px;
+        padding-right: 20px;
+    } */
+}

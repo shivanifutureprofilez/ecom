@@ -19,6 +19,9 @@ import List from './pages/admin/Product/List';
 import Checkout from './pages/checkout/Checkout';
 import ThankYou from './Components/ThankYou';
 
+import Wishlist from './pages/my-profile/Wishlist';
+import ProductDetail from './pages/productDetail/ProductDetail';
+
 
 function App() {
   return (
@@ -39,7 +42,9 @@ function App() {
             <Route path="/contact-us" element={<Contact />}></Route>
             <Route path="/blog" element={<Blog />}></Route>
             <Route path="/blog/:label" element={<BlogDetails />}></Route>
+            <Route path="/product-detail/:id" element={<ProductDetail/>}></Route>
             <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/wishlist" element={<Wishlist/>}></Route>
             <Route path="/myprofile" element={<Profile />}></Route>
 
             {/* Admin Management */}

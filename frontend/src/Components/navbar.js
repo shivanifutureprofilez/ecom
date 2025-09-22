@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { CgProfile } from "react-icons/cg";
 
 
+
 function Navbar({ children }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { setUser, user } = useContext(MyContext)
@@ -134,7 +135,7 @@ function Navbar({ children }) {
                       className="block hover:text-yellow-600"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      {link.name} +
+                      {link.name} 
                     </a>
                   </li>
                 ))}
@@ -142,10 +143,10 @@ function Navbar({ children }) {
 
 
               <div className="flex items-center space-x-4 mt-4">
-                <FiSearch className="text-xl cursor-pointer hover:text-yellow-600" />
-                <FiHeart className="text-xl cursor-pointer hover:text-yellow-600" />
+                {/* <FiSearch className="text-xl cursor-pointer hover:text-yellow-600" /> */}
+                <Link to="/myprofile"> <CgProfile  className="text-xl cursor-pointer hover:text-yellow-600" /></Link>
                 <Link to="/cart"> <FiShoppingCart className="text-xl cursor-pointer hover:text-yellow-600" /></Link>
-                <FiMoon className="text-xl cursor-pointer hover:text-yellow-600" />
+                {/* <FiMoon className="text-xl cursor-pointer hover:text-yellow-600" /> */}
               </div>
             </div>
           )}
