@@ -4,19 +4,15 @@ import { useState } from "react";
 import { CiShoppingCart } from "react-icons/ci";
 
 export default function AddToCart ({wishlist, product, product_id, qty}) { 
-    
-    const [loading, setLoading] = useState(false);
-    const [count, setCount] = useState();
-    const [added, setAdded] = useState(false)
-    const [cart, setCart] = useState(product?.isAddedToCart || false);
-    const addtocart = () => { 
+      const [isCart, setIsCart] = useState(product.isCartAdded)
+    const [loading, setLoading] = useState(false)
+      const addtocart = () => { 
         setLoading(true);
         const additem = Api.post("/cart/add-to-cart",{product_id, qty, wishlist: wishlist ? 1 : 0});
         additem.then((res)=>{ 
             if(res.data.status){ 
                 toast.success(res.data.message)
-                setAdded(true)
-                setCart(true)
+                setIsCart(!isCart)
             } else { 
                 toast.error(res.data.message)
             }
@@ -31,20 +27,15 @@ export default function AddToCart ({wishlist, product, product_id, qty}) {
             setLoading(false);
         })
     }
+  
 
     return <>
-        <button className={`bg-black flex items-center text-center justify-center text-white rounded-full py-2 px-4 mt-2  w-full ${added ? "pointer-events-none" : ""}`} onClick={addtocart} >
-
-            {/* {added ? (
-  "Added"
-) : loading ? (
-  "Adding..."
-) : ( */}
+        <button className={`bg-black flex items-center text-center justify-center text-white rounded-full py-2 px-4 mt-2  w-full ${isCart ? "pointer-events-none" : ""}`} onClick={addtocart} >
+        
   <>
     <CiShoppingCart className="text-white me-2 rounded-full" size={25} />
-    {cart ? "Added" : "Add To Cart"}
+     {isCart ? "ADDED" : "Add To Cart"}
   </>
-
             </button>
     </>
 }

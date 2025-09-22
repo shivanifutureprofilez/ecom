@@ -13,8 +13,8 @@ function getToken() {
 console.log("window.location.host",window.location.host)
 
 let Api = axios.create({
-    // baseURL: window.location.host == 'localhost:3000' ?  API_URL  : API_URL_LIVE,
-    baseURL: "http://localhost:5001/api",
+    baseURL: window.location.host == 'localhost:3000' ?  API_URL  : API_URL_LIVE,
+    //baseURL: "http://localhost:5001/api",
     headers: {
         'Accept': 'application/json',
         'Access-Control-Allow-Origin': '*',
