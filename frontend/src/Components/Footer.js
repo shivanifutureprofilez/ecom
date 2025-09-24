@@ -11,7 +11,8 @@ function Footer({bg,text}) {
           <div className="flex flex-col items-start min-w-[180px]  p-5 md:p-0 ">
             <div className="flex items-center space-x-2 mb-2">
               {/* <img src="/logo.svg" alt="Furnixar" className="h-8 w-8" /> */}
-             <img className="max-w-[200px] w-[200px]" src="https://furnixar.vercel.app/assets/logo-DXjmQiDB.svg" />
+             <img className="max-w-[200px] w-[200px]" src='/logo.png'/>
+             {/* <img className="max-w-[200px] w-[200px]" src="https://furnixar.vercel.app/assets/logo-DXjmQiDB.svg" /> */}
             </div>
             <p className={`text-sm max-w-[380px] text-black`}>
               Furnixar is a modern furniture template for an eCommerce website designed to help you create an impressive online store.

@@ -11,7 +11,7 @@ export default function UserProfile({ user }) {
         Api.get('/checkout/address')
             .then((res) => {
                 if (res.data.status) {
-                    setAddress(res.data.showaddress);
+                    setAddress(res.data.showaddress); 
                 }
                 else {
                     setAddress([]);
@@ -45,7 +45,7 @@ export default function UserProfile({ user }) {
                </div>
                <div class="flex items-center gap-2 hover:cursor-pointer" >
                <IoLocationOutline size={24} className='text-yellow-700'/>
-               <span class="leading-none font-medium text-base sm:text-lg">{address?.address}</span>
+               <span class="leading-none font-medium text-base sm:text-lg">{address?.showaddress}</span>
                </div></div> 
             </div>
         </div>

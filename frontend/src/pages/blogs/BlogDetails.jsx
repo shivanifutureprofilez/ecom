@@ -21,7 +21,7 @@ export default function BlogDetails() {
             "name": "Jon Doue",
             "image": "https://furnixar.vercel.app/assets/tmnl-02-BwH4vLAt.jpg"
         },
-        "featured_image": "https://furnixar.vercel.app/assets/blog-details-D8USqq_I.jpg",
+        "featured_image": "https://cozycorner-be87.kxcdn.com/cozycorner-simple/wp-content/uploads/2025/03/simple-banner-2.jpg",
         "content": [
             {
                 "id": 1,
