@@ -13,8 +13,8 @@ import DisplayReviews from './DisplayReviews';
 function ProductReview({ product }) {
     const [label, setLabel] = useState('desc')
 
+   const [reviewUpdated, setReviewUpdated] = useState(false);
 
-   
     return (
         <div className='container mx-auto'>
             <div className="flex flex-wrap items-center justify-between mb-6  p-5 md:p-0">
@@ -87,8 +87,9 @@ function ProductReview({ product }) {
                         <FaStar className="text-gray-200" />
                         <p className='px-2 text-gray-500 text-sm font-medium tracking-wide'>1 Review</p>
                     </div> */}
-                <WriteReview />
-                <DisplayReviews product={product}/>
+                
+                <WriteReview setReviewUpdated={setReviewUpdated} />
+                <DisplayReviews reviewUpdated={reviewUpdated} product={product}/>
                     
 
                 </div>

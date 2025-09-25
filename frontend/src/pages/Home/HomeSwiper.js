@@ -7,6 +7,8 @@ import { GiAqueduct } from "react-icons/gi";
 import { GiBlackBridge } from "react-icons/gi";
 import { GiBinoculars } from "react-icons/gi";
 import { GiBrainTentacle } from "react-icons/gi";
+import { SiTheboringcompany } from "react-icons/si";
+import { SiGnuicecat } from "react-icons/si";
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -47,7 +49,9 @@ export default function HomeSwiper() {
           }
         }
       >
-        
+      
+      <SwiperSlide className=""><SiTheboringcompany className=" mb-4  w-full mx-auto" size={100} /></SwiperSlide>
+      <SwiperSlide className=""><SiGnuicecat className=" mb-4  w-full mx-auto" size={100} /></SwiperSlide>
       <SwiperSlide className=""><LiaSignatureSolid className=" mb-4  w-full mx-auto" size={100} /></SwiperSlide>
       <SwiperSlide><MdAdd className=" mb-4  text-center w-full mx-auto" size={100} /></SwiperSlide>
       <SwiperSlide><GiGooeySword className=" mb-4  text-center w-full mx-auto" size={100} /></SwiperSlide>
@@ -57,7 +61,7 @@ export default function HomeSwiper() {
       <SwiperSlide><GiBlackBridge className=" mb-4  text-center w-full mx-auto" size={100} /></SwiperSlide>
       <SwiperSlide><GiBinoculars className=" mb-4  text-center w-full mx-auto" size={100} /></SwiperSlide>
       <SwiperSlide><GiBrainTentacle className=" mb-4  text-center w-full mx-auto" size={100} /></SwiperSlide>
-        
+      
     </Swiper>
     </div>
     </div>

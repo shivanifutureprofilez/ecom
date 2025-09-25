@@ -1,24 +1,75 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { MdOutlineNoteAdd } from "react-icons/md";
 import { Api } from '../../../Api/Api';
 import Admin from '../Admin';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function Add() {
-    const [items, setItems] = useState({
+    const { id } = useParams();
+        const [items, setItems] = useState({
         name: "",
         product_type: "",
         brand_name: "",
         price: "",
         image: "",
-        content: ""
+        content: "",
     })
+
+    const ShowProductDetails = (id) => {
+        Api.get(`/product/product-detail/${id}`)
+            .then((res) => {
+                console.log("res", res);
+                if (res.data.status) {
+                    //toast.success(res.data.message);
+                    const data = res.data.productData;
+                    setItems({
+                        name: data.name || "",
+                        product_type: data.product_type || '',
+                        brand_name: data.brand_name || '',
+                        price: data.price || '',
+                        image: data.image || '',
+                        content: data.content || '',
+                        id :  data?._id
+                    })
+                } else {
+                    toast.error(res.data.message);
+                }
+            })
+            .catch((error) => {
+                console.log("error", error);
+                toast.error("Unable To Fetch Product Details. Try Again Later.");
+            });
+    };
+
+    console.log("items" ,items)
+
+    useEffect(() => {
+        if (id) {
+            ShowProductDetails(id);
+        }
+    }, [id]);
+
+
+
+    const editProduct = () => {
+        const data = Api.post(`/product/update-product`, items);
+        data.then((res) => {
+            if (res.data.status) {
+                toast.success(res.data.message);
+                navigate("/admin/product");
+            } else {
+                toast.error(res.data.message)
+            }
+        })
+    }
+
+
 
     const handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        setItems(values => ({ ...values, [name]: value })); 
+        setItems(values => ({ ...values, [name]: value }));
     }
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false)
@@ -145,12 +196,12 @@ function Add() {
                             </form>
                         </div>
                         <button
-                            onClick={handleSubmit}
+                            onClick={id ? editProduct : handleSubmit}
                             type="submit"
                             disabled={loading}
                             className="w-full md:w-32 bg-black text-white font-medium py-3"
                         >
-                            {loading ? "Loading..." : "Submit"}
+                            {id ? "Edit" : (loading ? "Loading..." : "Submit")}
                         </button>
                     </div>
                 </div>

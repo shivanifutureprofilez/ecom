@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 import { Api } from '../../Api/Api';
 
-function DisplayReviews({ product }) {
+function DisplayReviews({ product, reviewUpdated }) {
   const { id } = useParams();
   console.log("product id", product)
   const [reviews, setReviews] = useState([]);
@@ -31,13 +31,15 @@ function DisplayReviews({ product }) {
     if (id) {
       getReviews(id);
     }
-  }, [id]);
+  }, [id, reviewUpdated]);
+
+
   return (
     <div className='container mx-auto'>
       {reviews.map((review) => (
         <div key={review._id} className="flex gap-4 mb-6 border-b pb-4">
           <img src={product?.image} alt="" className="object-cover w-16 h-16 rounded"/>
-          <div>
+          <div> 
             <h2 className="capitalize font-semibold">{review.name}</h2>
             <p className="text-sm text-gray-500">
               {new Date(review.createdAt).toLocaleDateString()}

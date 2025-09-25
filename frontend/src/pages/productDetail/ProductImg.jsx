@@ -7,6 +7,7 @@ import { CiHeart } from "react-icons/ci";
 import { Api } from '../../Api/Api';
 import toast from 'react-hot-toast';
 import AddToWishlist from '../../Components/AddToWIshlist';
+import Rating from './Rating';
 
 function ProductImg({ product }) {
   const [qty, setQty] = useState(product?.quantity || 1);
@@ -20,7 +21,7 @@ function ProductImg({ product }) {
 
 
         <div className='relative'>
-          <Image classes="w-full object-cover shadow h-full max-h-[500px] rounded-3xl" src={product?.image}></Image>
+          <Image classes="w-full object-cover shadow h-full max-h-[570px] rounded-3xl " src={product?.image}></Image>
           <div className='absolute top-6 right-6 z-10'>
             <AddToWishlist
               product={product}
@@ -32,12 +33,8 @@ function ProductImg({ product }) {
           <p className='text-black text-lg  capitalize '>{product?.brand_name}</p>
           <h1 className='font-bold capitalize tracking-widest text-3xl'>{product?.name}</h1>
           <div className="stars flex gap-1 mt-2">
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-yellow-500" />
-            <FaStar className="text-gray-200" />
-            <p className='px-2 text-gray-500 text-sm font-medium tracking-wide'>1 Review</p>
+            <Rating product={product}  /> 
+            <p className='px-2 text-gray-500 text-sm font-medium tracking-wide py-3'>{product?.reviews?.length} Review</p>
           </div>
           <h1 className='mt-4 font-bold capitalize tracking-widest text-3xl text-red-700'>&#8377;{product?.price}</h1>
           <hr className="mt-4 mb-4" />

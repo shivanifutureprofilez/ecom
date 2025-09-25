@@ -8,75 +8,50 @@ import Image from "./Image";
 import { Api } from "../Api/Api";
 import toast from "react-hot-toast";
 import PriceFormat from './PriceFormat';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AddToWishlist from "./AddToWIshlist";
+import Rating from "../pages/productDetail/Rating";
+import Add from "../pages/admin/Product/Add";
 
-function ProductItem({  product, isAdmin, wishlist, GetWistList, GetProducts, wishlistPage }) {
+function ProductItem({ product, isAdmin, wishlist, GetWistList, GetProducts, wishlistPage }) {
 
   const { setUser, user } = useContext(MyContext);
-
-  // const addToWishlist = (product) => {
-  //   setLoading(true);
-  //   const additem = Api.post("/wishlist/add-to-wishlist", {
-  //     product_id: product?._id
-  //   });
-  //   additem.then((res) => {
-  //     if (res.data.status) {
-  //       setiswished(!iswished)
-  //       GetProducts();
-  //     } else {
-  //       toast.error(res.data.message)
-  //     }
-  //     setTimeout(() => {
-  //       setLoading(false);
-  //     }, 1000)
-  //   }).catch((err) => {
-  //     console.log('error', err);
-  //     toast.error('Failed To add to wishlist. Try Again Later');
-  //     setLoading(false);
-  //   })
-  // }
+  const [items, setItems] = useState({
+    name: "",
+    product_type: "",
+    brand_name: "",
+    price: "",
+    image: "",
+    content: ""
+  })
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false)
 
 
-
-  // const deleteFromWishlist = (id) => {
-  //   console.log("id" ,id)
-  //   const data = Api.post('/wishlist/removeWishlistItem', { _id: id });
-    
-  //   data.then((res) => {
-  //     if (res.data.status) {
-  //       toast.success(res.data.message)
-  //       GetWistList();
-  //     }
-  //     else {
-  //       toast.error(res.data.message)
-  //     }
-  //   }).catch((err) => {
-  //       console.log('error', err);
-  //       toast.error('Failed To remove from wishlist. Try Again Later');
-  //   })
-  // }
 
 
   return <>
     {product ?
       <>
-        <div className={` ${user?.isAdmin === 1 && product.deletedAt ? 'opacity-[0.8] border border-red-300 ' : 'bg-gray-100 border border-gray-200'} product  overflow-hidden' `} key={product.name}>
+        <div className={` ${user?.isAdmin === 1 && product?.deletedAt ? 'opacity-[0.8] border border-red-300 ' : 'bg-gray-100 border border-gray-200'} product  overflow-hidden' `} key={product?.name}>
           <div className="  relative overflow-hidden  mb-4 ">
-            <button className="absolute top-2 left-2 bg-black rounded-full px-3 py-1 z-10 text-white capitalize">{product.product_type ||product.product.product_type } ({ product.brand_name || product.product.brand_name})</button>
+            <button className="absolute top-2 left-2 bg-black rounded-full px-3 py-1 z-10 text-white capitalize">{product?.product_type || product?.product?.product_type} ({product?.brand_name || product?.product?.brand_name})</button>
             {/* <div className="hover:scale-110 duration-300  mb-3 w-[300px] h-[300px]  object-cover  shadow"> */}
-            <Link to={`/product-detail/${product._id}`} ><Image src={product.image ||  product.product.image} alt={product.name} classes={'hover:scale-110 duration-300  mb-3 w-full h-[300px]  object-cover  shadow'} /></Link>
+            <Link to={`/product-detail/${product?._id}`} ><Image src={product?.image || product?.product?.image} alt={product?.name} classes={'hover:scale-110 duration-300  mb-3 w-full h-[300px]  object-cover  shadow'} /></Link>
             {/* </div> */}
             <div className="  productactions  absolute top-[10px] right-5 flex flex-col gap-2 ">
               {/* {wishlist != true && ( */}
-              
-              
-              <AddToWishlist 
-                  product={product} wishlistPage={wishlistPage}
+
+
+              {isAdmin !== 1 && (
+                <AddToWishlist
+                  product={product}
+                  wishlistPage={wishlistPage}
                   GetProducts={GetProducts}
                   GetWistList={GetWistList}
                 />
-                            {/* {wishlistPage !== true ?
+              )}
+              {/* {wishlistPage !== true ?
                 <div className=" rounded-full">
                   <button className={`flex justify-center items-center w-[48px] h-[48px] rounded-full p-2 ${iswished ? "bg-pink-600 !text-white" : "bg-white"}`} onClick={() => { addToWishlist(product) }}>
                     <CiHeart className="  rounded-full" size={25} />
@@ -93,30 +68,24 @@ function ProductItem({  product, isAdmin, wishlist, GetWistList, GetProducts, wi
 
 
               {/* // )} */}
-              <div className="flex justify-center items-center w-[48px] h-[48px] bg-white p-2 rounded-full">
+              {/* <div className="flex justify-center items-center w-[48px] h-[48px] bg-white p-2 rounded-full">
                 <IoEyeOutline className=" rounded-full" size={25} />
-              </div>
+              </div> */}
             </div>
 
           </div>
 
           <div className="px-4 py-4">
             <div className="flex flex-wrap justify-between">
-              <p className="text-black text-lg  capitalize line-clamp-1"><Link to="/product-detail" >{product.name || product.product.name}  </Link></p>
+              <p className="text-black text-lg  capitalize line-clamp-1"><Link to="/product-detail" >{product?.name || product?.product?.name}  </Link></p>
             </div>
-            <h2 className="text-gray-800 text-lg   font-semibold">Price : <PriceFormat price={product.price || product.product.price} /></h2>
-            <div className="stars flex gap-1 ">
-              <FaStar className="text-yellow-500" />
-              <FaStar className="text-yellow-500" />
-              <FaStar className="text-yellow-500" />
-              <FaStar className="text-yellow-500" />
-              <FaStar className="text-gray-200" />
-            </div>
+            <h2 className="text-gray-800 text-lg   font-semibold">Price : <PriceFormat price={product?.price || product?.product?.price} /></h2>
+            <Rating product={product} />
             {isAdmin === 1 ?
-              <button className="bg-blue-600 text-white text-center rounded-xl w-full p-2 mt-3">Edit</button>
+              <Link to={`/admin/productEdit/${product._id}`} className="bg-black text-white text-center rounded-xl w-full p-2 mt-3">Edit</Link>
               : <>
-                <AddToCart wishlist={wishlist} 
-                product={product} product_id={product?._id || product.product?._id} qty={1} />
+                <AddToCart wishlist={wishlist}
+                  product={product} product_id={product?._id || product?.product?._id} qty={1} />
               </>
             }
           </div>

@@ -50,6 +50,7 @@ function App() {
             {/* Admin Management */}
             <Route path='/admin' element={<Admin />}></Route>
             <Route path='/admin/product-add' element={<Add />}></Route>
+             <Route path='/admin/productEdit/:id' element={<Add />}></Route>
             <Route path='/admin/product' element={<List />}></Route>
             <Route path='/checkout' element={<Checkout />}></Route>
             <Route path='/ThankYou' element={<ThankYou/>}></Route>

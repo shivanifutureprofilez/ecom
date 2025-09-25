@@ -29,10 +29,14 @@ function Wishlist({ user }) {
 
     return (
         <div className='grid grid-cols-1 gap-y-4 md:grid-cols-3 md:gap-4'>
-
-            {wishlistProducts?.map((item, index) => (
-                <ProductItem key={index} wishlistItem={wishlistProducts} product={item} wishlist={true}  wishlistPage={true} GetWistList={GetWistList}/>
-            ))}
+            {wishlistProducts?.map((item, index) => {
+               return <>
+               {item?.product !== null ?
+                   <ProductItem key={index} wishlistItem={wishlistProducts} product={item} wishlist={true}  wishlistPage={true} GetWistList={GetWistList}/>
+               : ''}
+               </> 
+            }
+            )}
         </div>
     )
     

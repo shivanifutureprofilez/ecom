@@ -2,6 +2,7 @@ import { FiHome } from "react-icons/fi";
 import { RiSofaLine } from "react-icons/ri";
 import { GiOfficeChair } from "react-icons/gi";
 import { GiPorcelainVase } from "react-icons/gi";
+import { Link } from "react-router-dom";
 function CategoryBar() {
   const categories = [
     {
@@ -40,9 +41,11 @@ function CategoryBar() {
             {cat.icon}
           </div>
           <div className="p-1 flex-1 text-left">
+            <Link to="/shop">
             <h2 className="text-[15px] font-medium text-gray-800 leading-tight truncate">
               {cat.title}
             </h2>
+            </Link>
             <p className="text-sm text-gray-500 mt-1">{cat.products}</p>
           </div>
         </div>

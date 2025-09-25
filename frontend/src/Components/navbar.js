@@ -53,7 +53,7 @@ function Navbar({ children }) {
   }, []);
 
   return (
-    <div className="py-4 flex !bg-white !z-[99999]  shadow-md justify-center fixed  top-0 left-0  w-full">
+    <div className="py-4 flex !bg-white !z-[99]  shadow-md justify-center fixed  top-0 left-0  w-full">
       <div className="container m-auto">
         <div className="  p-1 md:p-3 w-full">
           <div className="flex items-center justify-between px-2 md:px-8 py-1 md:py-3">

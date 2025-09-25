@@ -3,10 +3,10 @@ import toast from "react-hot-toast";
 import { Api } from "../../Api/Api";
 import { useParams } from "react-router-dom";
 
-function WriteReview() {
+function WriteReview({setReviewUpdated}) {
 
     const [show, setShow] = useState(false);
-const {id} = useParams();
+        const {id} = useParams();
         const [rating,setRating] = useState(0)
         const [review, setReview] = useState('');
 
@@ -34,9 +34,10 @@ const {id} = useParams();
                         review:review,
                         product_id:id
                     });
-                toast.success(response?.data?.message);
-                setLoading(false)
-                setShow(!show)
+                    toast.success(response?.data?.message);
+                    setLoading(false)
+                    setShow(!show);
+                    setReviewUpdated(new Date());
             }
             catch (error) {
                 console.log("error :", error);
@@ -65,7 +66,7 @@ const {id} = useParams();
                         {/* <h2 className="text-lg text-bold text-center">Write Something...</h2> */}
                         <h1 className='font-semibold tracking-widest text-2xl mt-4'>Add a Review</h1>
                     <p className='font-medium capitalize tracking-wider text-base text-gray-600 mt-2'>Your email address will not be published!!</p>
-                    <form className="mt-6" onSubmit={handleSubmit}>
+                    <div className="mt-6"  >
                         {/* <div className='grid md:grid-cols-1 gap-2 mb-4 mt-3'>
                             <div >
                                 <label className="font-medium text-base block mb-2">Name *</label>
@@ -144,8 +145,6 @@ const {id} = useParams();
                             />
                             {/* </div> */}
                         </div>
-                    </form>
-                            
                         <div className="flex justify-center">
 
                         <button
@@ -156,6 +155,8 @@ const {id} = useParams();
                             Submit
                         </button>
                         </div>
+                    </div>
+                            
                     </div>
                 </div>
         </div>
