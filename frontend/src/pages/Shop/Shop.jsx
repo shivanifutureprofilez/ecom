@@ -16,7 +16,7 @@ function Shop() {
       <Navbar />
       <Banner title={"Shop"} />
       <Filter category={category} setCategory={setCategory} select={select} setSelect={setSelect}/>
-      <div className=" container  mx-auto py-5 ">  
+      <div className="container  mx-auto py-5 ">  
         {/* <hr className="mb-8" /> */}
         <Listing  category={category} select={select} />
         {/* <div className="flex justify-center items-center">

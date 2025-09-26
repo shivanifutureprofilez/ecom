@@ -8,13 +8,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 function Add() {
     const { id } = useParams();
         const [items, setItems] = useState({
-        name: "",
-        product_type: "",
-        brand_name: "",
-        price: "",
-        image: "",
-        content: "",
-    })
+            name: "",
+            product_type: "chair",
+            brand_name: "",
+            price: "",
+            image: "",
+            content: "",
+        })
 
     const ShowProductDetails = (id) => {
         Api.get(`/product/product-detail/${id}`)
@@ -132,8 +132,8 @@ function Add() {
                                             value={items?.product_type}
                                             name='product_type'
                                         >
-                                            <option className="pl-1 pr-1" value="interior">Interior</option>
                                             <option className="pl-2 pr-2" value="chair">Chair </option>
+                                            <option className="pl-1 pr-1" value="interior">Interior</option>
                                             <option className="pl-2 pr-2" value="table">Table</option>
                                             <option className="pl-2 pr-2" value="lamp">Lamp</option>
                                             <option className="pl-2 pr-2" value="sofa">Sofa</option>

@@ -1,5 +1,5 @@
 import React from 'react'
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from 'react-router-dom';
 
 function Header() {
@@ -20,14 +20,19 @@ function Header() {
             {/* Logo */}
             
               {/* <span className="block text-2xl font-bold text-gray-800"> */}
+              <Link to='/'>
               <img className="max-w-[200px] w-[200px]" src={'/logo.png'} />
+              </Link>
               {/* </span> */}
               <div className='flex gap-4'>
                <button onClick={logout} className="text-gray-700 font-semibold cursor-pointer hover:text-yellow-600">Logout</button>
                <Link to="/admin/product" className="text-gray-700 font-semibold cursor-pointer hover:text-yellow-600">Admin Panel</Link>
                 </div>
            
-            
+            <Toaster
+          position="top-right"
+          reverseOrder={false}
+        />
 
           </div>
         </div>

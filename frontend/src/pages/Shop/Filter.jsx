@@ -2,9 +2,18 @@ import React, { useState } from 'react'
 
 function Filter({setCategory, category, select, setSelect}) {
 
+    const params = new URLSearchParams(window.location.search);
+    const selected_category = params.get("selected_category");
+
+    const [cats, setCats] = useState(selected_category || category);
     const handleChange = (e) => {
         setSelect(e.target.value);
     };
+    const updatecategory = (e) => { 
+        setCats(e)
+        setCategory(e)
+    }
+
     return (
         <div className='container mt-12 mx-auto'>
         <div className='container mx-auto  pb-8 md:pb-[50px]'>
@@ -13,19 +22,17 @@ function Filter({setCategory, category, select, setSelect}) {
                 <div className='w-full md:w-auto py-2 '>
                     <h2 className='font-medium text-base block mb-2'>Choose Category</h2>
                     <div className='flex items-center flex-wrap gap-2'>
-                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${category == 'all' ? "bg-black text-white" : ''}  `} onClick={()=> {setCategory('all')}}><span className="pl-2 pr-2">All Products</span></button>
+                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${cats == 'all' ? "bg-black text-white" : ''}  `} onClick={()=> {updatecategory('all')}}><span className="pl-2 pr-2">All Products</span></button>
                         
-                        
-                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${category == 'Sofa' ? "bg-black text-white" : ''}  `} onClick={()=> {setCategory('Sofa')}}><span className="pl-2 pr-2">Sofa and Chair</span></button>
+                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${cats == 'sofa' ? "bg-black text-white" : ''}  `} onClick={()=> {updatecategory('sofa')}}><span className="pl-2 pr-2">Sofa and Chair</span></button>
 
-                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${category == 'Interior' ? "bg-black text-white" : ''}  `} onClick={() => {setCategory('Interior')}}><span className="pl-2 pr-2">Full Interior</span></button>
+                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${cats == 'chairs' ? "bg-black text-white" : ''}  `} onClick={() => {updatecategory('chairs')}}><span className="pl-2 pr-2">Full Interior</span></button>
 
-                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${category == 'Lamp' ? "bg-black text-white" : ''}  `} onClick={() => {setCategory('Lamp')}}><span className="pl-2 pr-2" >Lamp and Vase</span></button>
+                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${cats == 'lamp' ? "bg-black text-white" : ''}  `} onClick={() => {updatecategory('lamp')}}><span className="pl-2 pr-2" >Lamp and Vase</span></button>
                       
+                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${cats == 'table' ? "bg-black text-white" : ''}  `} onClick={() => {updatecategory('table')}}><span className="pl-2 pr-2">Tables</span></button>
 
-                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${category == 'Table' ? "bg-black text-white" : ''}  `} onClick={() => {setCategory('Table')}}><span className="pl-2 pr-2">Tables</span></button>
-
-                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${category == 'Chair' ? "bg-black text-white" : ''}  `} onClick={() => {setCategory('Chair')}}><span className="pl-2 pr-2">Chairs</span></button>
+                        <button className={`border py-[7px] rounded-lg px-[8px] hover:bg-yellow-700 hover:text-white ${cats == 'chair' ? "bg-black text-white" : ''}  `} onClick={() => {updatecategory('chair')}}><span className="pl-2 pr-2">Chairs</span></button>
                     </div>
                 </div>
 

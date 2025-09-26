@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { Api } from '../../Api/Api';
 import ProductItem from '../../Components/ProductItem';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 
 function Listing({ wishlist, category, select, isAdmin }) {
+
+  const params = new URLSearchParams(window.location.search);
+  const selected_category = params.get("selected_category");
+  const [cats, setCats] = useState(selected_category || category || '' )
+
+  useEffect(()=>{
+    setCats(category);
+  },[category]);
+
+
   const [products, setProducts] = useState([]);
   const GetProducts = () => {
-    Api.get('/product/get-product')
+    Api.get(`/product/get-product?category=${cats}`)
       .then((res) => {
         if (res.data.status) {
           let productdata = [];
-          if (category === "all") {
+          if (cats === "all") {
             productdata = res.data.products;
           } else {
               const filteredProducts = res.data.products.filter(
-              (item) => item.product_type?.toLowerCase() === category?.toLowerCase()
+              (item) => item.product_type?.toLowerCase() === cats&& cats?.toLowerCase()
             );
             if (select === "low") {
               productdata = [...filteredProducts].sort((a, b) => a.price - b.price);
@@ -36,8 +47,8 @@ function Listing({ wishlist, category, select, isAdmin }) {
   };
 
   useEffect(() => {
-    GetProducts(category, select)
-  }, [category, select]);
+    GetProducts(cats, select)
+  }, [cats, select]);
 
   return (
     <div className="">

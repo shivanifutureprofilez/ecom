@@ -11,12 +11,9 @@ function DisplayReviews({ product, reviewUpdated }) {
     Api.get(`/review/showReviews/${id}`)
       .then((res) => {
         if (res.data.status) {
-          toast.success(res.data.message);
           setReviews(res.data.reviews);
-          console.log("reviews state data : ", reviews);
         }
         else {
-          toast.error(res.data.message);
           setReviews([]);
         }
       })
