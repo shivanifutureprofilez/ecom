@@ -78,7 +78,7 @@ function ProductReview({ product }) {
             )}
             {label === "review" && (
                 <div>
-                    <h1 className='font-semibold capitalize tracking-widest text-3xl mb-4'>Customer Reviews</h1>
+                    
                     {/* <div className="stars flex gap-1 mt-6">
                         <FaStar className="text-yellow-500" />
                         <FaStar className="text-yellow-500" />

@@ -49,9 +49,13 @@ function WriteReview({setReviewUpdated}) {
         
   return (
     <>
-        <button  onClick={()=>setShow(!show)}  class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-4" type="button">
+    <div className="flex">
+        <h1 className='font-semibold capitalize tracking-widest text-3xl mb-4'>Customer Reviews</h1>
+        <button  onClick={()=>setShow(!show)}  class="ml-auto block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-4" type="button">
         Write Review
         </button>
+    </div>
+    
 
         <div className={`flex justify-center items-center h-full w-full fixed top-0 right-0 left-0 z-[9999999999] ${show ? "" : 'hidden'} `}>
             <div className="bg-black w-full h-full absolute top-0 left-0 opacity-[0.8] "></div>

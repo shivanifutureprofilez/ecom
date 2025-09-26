@@ -54,6 +54,8 @@ function ProductList({ cart, checkout, setCarts}) {
         const [qty, setQty] = useState(item?.quantity || 1);
         const value = 1;
         const UpdateCart = (product_id, qty, price) => {
+            
+
             const data = Api.post('/cart/updateCart', { product_id, qty, price });
             data.then((res) => {
                 if (res.data.status) {
@@ -77,6 +79,10 @@ function ProductList({ cart, checkout, setCarts}) {
             })
         }
         const increseQty = () => {
+            if( qty + 1 > item?.product?.stock ){
+                toast.error("Only Limited stock is available");
+                return false;
+            }
             UpdateCart(item?.product?._id, qty + 1);
             setQty(qty + 1);
             item.quantity = qty + 1;

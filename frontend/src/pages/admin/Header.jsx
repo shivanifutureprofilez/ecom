@@ -1,6 +1,7 @@
 import React from 'react'
 import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from 'react-router-dom';
+import CheckLogin from '../Login/CheckLogin';
 
 function Header() {
   const navigate = useNavigate();
@@ -30,9 +31,11 @@ function Header() {
                 </div>
            
             <Toaster
-          position="top-right"
-          reverseOrder={false}
-        />
+              position="top-right"
+              reverseOrder={false}
+            />
+
+     
 
           </div>
         </div>

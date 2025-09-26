@@ -13,6 +13,7 @@ export default function AddToCart ({wishlist, product, product_id, qty}) {
             toast.error("You have to login first");
             return false;
         }
+        
         setLoading(true);
         const additem = Api.post("/cart/add-to-cart",{product_id, qty, wishlist: wishlist ? 1 : 0});
         additem.then((res)=>{ 
@@ -36,7 +37,7 @@ export default function AddToCart ({wishlist, product, product_id, qty}) {
   
 
     return <>
-        <button className={`bg-black flex items-center text-center justify-center text-white rounded-full py-2 px-4 mt-2  w-full ${isCart ? "pointer-events-none" : ""}`} onClick={addtocart} >
+        <button className={`${product?.stock < 1 ? "pointer-events-none" : ""} bg-black flex items-center text-center justify-center text-white rounded-full py-2 px-4 mt-2  w-full ${isCart ? "pointer-events-none" : ""}`} onClick={addtocart} >
         
   <>
     <CiShoppingCart className="text-white me-2 rounded-full" size={25} />

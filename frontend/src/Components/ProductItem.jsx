@@ -39,6 +39,7 @@ function ProductItem({ product, isAdmin, wishlist, GetWistList, GetProducts, wis
             {/* <div className="hover:scale-110 duration-300  mb-3 w-[300px] h-[300px]  object-cover  shadow"> */}
             <Link to={`/product-detail/${product?._id}`} ><Image src={product?.image || product?.product?.image} alt={product?.name} classes={'hover:scale-110 duration-300  mb-3 w-full h-[300px]  object-cover  shadow'} /></Link>
             {/* </div> */}
+            
             <div className="  productactions  absolute top-[10px] right-5 flex flex-col gap-2 ">
               {/* {wishlist != true && ( */}
 
@@ -88,6 +89,9 @@ function ProductItem({ product, isAdmin, wishlist, GetWistList, GetProducts, wis
                   product={product} product_id={product?._id || product?.product?._id} qty={1} />
               </>
             }
+
+
+            {product?.stock > 0 ? <p className="text-green-700 my-2 text-center">Only {product?.stock} stocks are avalable</p> : <p className="text-red-700 my-2 text-center">Out of stock</p>}
           </div>
         </div>
       </> : "No Products To Show"}

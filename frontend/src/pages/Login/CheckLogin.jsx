@@ -14,9 +14,8 @@ function CheckLogin({ children }) {
       if (res.data.status) {
         setUser(res.data.user)
       } else {
-        // setUser(null);
-        navigate('/login');
-        toast.error("You must have to login first.")
+            navigate('/login');
+            toast.error("You must have to login first.")
       }
     }).catch((err) => {
       console.log('err', err)

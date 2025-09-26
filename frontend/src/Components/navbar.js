@@ -6,8 +6,6 @@ import { MyContext } from "../context/UserContext";
 import toast from "react-hot-toast";
 import { CgProfile } from "react-icons/cg";
 
-
-
 function Navbar({ children }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { setUser, user } = useContext(MyContext)
@@ -30,6 +28,23 @@ function Navbar({ children }) {
       toast.success("Logged out successfully.")
     }, 1000)
   }
+
+   const GetUser = () => {
+    const fetch = Api.get('/myprofile');
+    fetch.then((res) => {
+      if (res.data.status) {
+        setUser(res.data.user)
+      }  
+    }).catch((err) => {
+      console.log('err', err)
+      // navigate('/login');
+      // toast.error("You must have to login first. Something went wrong")
+    })
+  }
+
+  useEffect(() => {
+    GetUser();
+  }, []);
 
   
   return (
@@ -134,6 +149,8 @@ function Navbar({ children }) {
           )}
         </div>
       </div>
+
+  
     </div>
   );
 }

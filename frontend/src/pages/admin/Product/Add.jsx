@@ -13,6 +13,7 @@ function Add() {
             brand_name: "",
             price: "",
             image: "",
+            stock: "",
             content: "",
         })
 
@@ -28,6 +29,7 @@ function Add() {
                         product_type: data.product_type || '',
                         brand_name: data.brand_name || '',
                         price: data.price || '',
+                        stock: data.stock || '',
                         image: data.image || '',
                         content: data.content || '',
                         id :  data?._id
@@ -111,7 +113,7 @@ function Add() {
                         </div>
                         <div className='container mx-auto'>
                             <form className="mt-6" onSubmit={handleSubmit}>
-                                <div className='grid grid-cols-3 gap-4 mb-4 mt-3'>
+                                <div className='grid grid-cols-4 gap-4 mb-4 mt-3'>
                                     <div >
                                         <label className="font-medium text-base block mb-2">Product Name</label>
                                         <input
@@ -147,6 +149,18 @@ function Add() {
                                             value={items?.brand_name}
                                             name='brand_name'
                                             placeholder="Enter Brand Name"
+                                            className=" w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                                   focus:ring-blue-500 focus:border-blue-500 py-3 px-4"
+                                        />
+                                    </div>
+                                    <div >
+                                        <label className="font-medium text-base block mb-2">Brand Name</label>
+                                        <input
+                                            type="number"
+                                            onChange={handleChange}
+                                            value={items?.stock}
+                                            name='stock'
+                                            placeholder="Enter Stock qty"
                                             className=" w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                                    focus:ring-blue-500 focus:border-blue-500 py-3 px-4"
                                         />
