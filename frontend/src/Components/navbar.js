@@ -23,23 +23,6 @@ function Navbar({ children }) {
   ];
   const navigate = useNavigate();
 
-  const GetUser = () => {
-    const fetch = Api.get('/myprofile');
-    fetch.then((res) => {
-      if (res.data.status) {
-        setUser(res.data.user)
-      } else {
-        // setUser(null);
-        navigate('/login');
-        toast.error("You must have to login first.")
-      }
-    }).catch((err) => {
-      console.log('err', err)
-      navigate('/login');
-      toast.error("You must have to login first. Something went wrong")
-    })
-  }
-
   const logout = () => {
     localStorage.removeItem("token");
     setTimeout(() => {
@@ -48,10 +31,7 @@ function Navbar({ children }) {
     }, 1000)
   }
 
-  useEffect(() => {
-    GetUser();
-  }, []);
-
+  
   return (
     <div className="py-4 flex !bg-white !z-[99]  shadow-md justify-center fixed  top-0 left-0  w-full">
       <div className="container m-auto">

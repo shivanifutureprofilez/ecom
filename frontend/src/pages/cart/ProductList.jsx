@@ -40,7 +40,7 @@ function ProductList({ cart, checkout, setCarts}) {
                 }
             }).catch((error) => {
                 console.log("error",error)
-                toast.error('No Products Found. Try Again Later');
+                // toast.error('No Products Found. Try Again Later');
             });
     }
 

@@ -1,12 +1,18 @@
 import { Api } from "../Api/Api"
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CiShoppingCart } from "react-icons/ci";
+import { MyContext } from "../context/UserContext";
 
 export default function AddToCart ({wishlist, product, product_id, qty}) { 
       const [isCart, setIsCart] = useState(product.isCartAdded)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const {user} = useContext(MyContext)
       const addtocart = () => { 
+        if(!user?.name){
+            toast.error("You have to login first");
+            return false;
+        }
         setLoading(true);
         const additem = Api.post("/cart/add-to-cart",{product_id, qty, wishlist: wishlist ? 1 : 0});
         additem.then((res)=>{ 
@@ -23,7 +29,7 @@ export default function AddToCart ({wishlist, product, product_id, qty}) {
             //     qty++;
             // }
         }).catch((err)=>{
-            toast.error("failed to add to cart")
+            toast.error("Enable to add item in cart.")
             setLoading(false);
         })
     }
